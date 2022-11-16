@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <carousel-content/>
     <movie-content/>
   </div>
 </template>
 
 <script>
 import MovieContent from '@/components/Movie.vue'
+import CarouselContent from '@/components/Carousel.vue'
 
   export default {
     name: 'HomeView',
     components: {
       MovieContent,
+      CarouselContent,
     },
 
   }

@@ -1,25 +1,17 @@
 <template>
   <div>
-    <!-- CAROUSEL SECTION -->
-    <section>
-      <h2>Carousel</h2>
-    </section>
+    <div id='head'>
+      <h2>Movie</h2>
+      <nav>
+        <div @click="isClicked('popular')" :class="{selected:popularClicked}">Popular</div>
+        <div @click="isClicked('recent')" :class="{selected:recentClicked}">Recent</div>
+      </nav>
+    </div>
 
-    <!-- MOVIE SECTION -->
-    <section>
-      <div id='head'>
-        <h2>Movie</h2>
-        <nav>
-          <div @click="isClicked('popular')" :class="{selected:popularClicked}">Popular</div>
-          <div @click="isClicked('recent')" :class="{selected:recentClicked}">Recent</div>
-        </nav>
-      </div>
-
-      <div>
-        <movie-popular v-if="popularClicked"/>
-        <movie-recent v-if="recentClicked"/>
-      </div>
-    </section>
+    <div>
+      <movie-popular v-if="popularClicked"/>
+      <movie-recent v-if="recentClicked"/>
+    </div>
   </div>
 </template>
 
