@@ -20,6 +20,10 @@ export default new Vuex.Store({
       state.token = token
       console.log(state.token)
     },
+    GET_MOVIES(state, payload){
+      state.movies = payload.splice(10)
+      console.log(state.movies)
+    }
   },
   actions: {
     // SIGN_UP
@@ -46,7 +50,7 @@ export default new Vuex.Store({
         });
     },
     // GET_MOVIES
-    getMovies(commit, payload){
+    getMovies(context, payload){
       axios({
         method:'get',
         url: `${MOVIE_API_URL}/${payload}`,
@@ -56,10 +60,7 @@ export default new Vuex.Store({
         }
       })
        .then((res)=>{
-        axios({
-          method:'post',
-          url: `${API_URL}/movies/`
-        })
+        context.commit('GET_MOVIES', res.data.results)
        })
        .catch((err)=>{
         console.log(err)

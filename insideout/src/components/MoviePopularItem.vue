@@ -1,14 +1,9 @@
 <template>
-  <div class="col-2">
-    <div class="card h-100">
-      <img :src="imgSrc" alt="" />
-      <div
-        class="card-body d-flex flex-column justify-content-center align-items-center">
-        <div>
-        </div>
-        <h4 class="card-title">{{ movie?.title }}</h4>
-        <p class="card-text">{{movie?.release_date.split('-')[0]}} / {{movie?.genre_ids}}</p>
-      </div>
+  <div id="popular">
+    <img :src="imgSrc" alt="" />
+    <div>
+      <p>{{ movie?.title }}</p>
+      <p>{{movie?.release_date.split('-')[0]}} / {{movie?.genre_ids}}</p>
     </div>
   </div>
 
@@ -30,7 +25,13 @@ export default {
 </script>
 
 <style scoped>
+#popular{
+  display: flex;
+  flex-direction: column;;
+}
 
-
+img{
+  max-width: 100px;
+}
 
 </style>
