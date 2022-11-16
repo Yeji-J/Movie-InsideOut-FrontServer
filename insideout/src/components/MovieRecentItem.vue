@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div id="homeMovie">
     <img :src="imgSrc" alt="">
-    <p>{{movie.release_date.split('-')[0]}} / {{movie.genre_ids}}</p>
-    <p>{{movie.title}}</p>
+    <span class="genre">{{movie.release_date.split('-')[0]}} / {{movie.genre_ids[0]}}</span>
+    <span class="movieTitle">{{movie.title}}</span>
   </div>
 </template>
 
@@ -20,16 +20,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
-img{
-  width: 100px;
-  border-radius: 10px;
-}
-
-div {
-  display:flex;
-  flex-direction: column;;
-}
 
 </style>

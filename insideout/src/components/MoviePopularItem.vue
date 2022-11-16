@@ -1,12 +1,9 @@
 <template>
-  <div id="popular">
-    <img :src="imgSrc" alt="" />
-    <div>
-      <p>{{ movie?.title }}</p>
-      <p>{{movie?.release_date.split('-')[0]}} / {{movie?.genre_ids}}</p>
-    </div>
+  <div id="homeMovie">
+    <img :src="imgSrc"/>
+    <span class="genre">{{movie?.release_date.split('-')[0]}} / {{movie?.genre_ids[0]}}</span>
+    <span class="movieTitle">{{ movie?.title }}</span>
   </div>
-
 </template>
 
 <script>
@@ -24,14 +21,38 @@ export default {
 }
 </script>
 
-<style scoped>
-#popular{
+<style>
+#homeMovie{
+  margin: 10px 20px;
+  width: 130px;
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
+  color: #F8F9FA;
 }
 
-img{
-  max-width: 100px;
+#homeMovie img{
+  width: 100%;
+  border-radius: 10px;
+  transition: transform .5s;
+}
+
+#homeMovie img:hover{
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+#homeMovie span {
+  margin-left: 10px;
+}
+#homeMovie .genre{
+  color: #C3DDEC;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+#homeMovie .movieTitle{
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
 </style>

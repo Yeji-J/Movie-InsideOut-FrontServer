@@ -11,13 +11,13 @@ import MovieRecentItem from './MovieRecentItem.vue';
 
 export default {
   name: "MovieRecent",
-  data(){
-    return {
-      movies: this.$store.state.movies.splice(10)
-    }
-  },
   components:{
     MovieRecentItem,
+  },
+  computed:{
+    movies(){
+      return this.$store.state.movies
+    }
   },
   created(){
     this.$store.dispatch('getMovies', 'popular')

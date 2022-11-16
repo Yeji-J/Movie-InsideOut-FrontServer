@@ -13,11 +13,9 @@ import MovieContent from '@/components/Movie.vue'
     components: {
       MovieContent,
     },
-  //   created(){
-  //   this.$store.dispatch('getMovies', 'popular')
-  //   this.$store.dispatch('getMovies', 'now_playing')
-  // },
+
   }
+
 </script>
 
 <style scoped>

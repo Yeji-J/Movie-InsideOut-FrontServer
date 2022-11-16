@@ -1,16 +1,22 @@
 <template>
   <div>
-    <h2>Movie</h2>
+    <section>
+      <h2>Carousel</h2>
+    </section>
+    <section>
+      <div id='head'>
+        <h2>Movie</h2>
+        <nav>
+          <div>Popular</div>
+          <div>Recent</div>
+        </nav>
+      </div>
 
-    <nav>
-      <span>Popular</span>  |
-      <span>Recent</span>
-    </nav>
-
-    <div>
-      <movie-popular/>
-      <movie-recent/>
-    </div>
+      <div>
+        <movie-popular/>
+        <movie-recent/>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -32,5 +38,25 @@ export default {
 
 <style scoped>
 
+#head {
+  margin: 20px 0;
+  padding-right: 70px;
+  padding-left: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
 
+nav{
+  display: flex;
+}
+
+nav div{
+  font-size: 20px;
+  margin: 0 20px;
+}
+
+nav div:hover{
+  cursor: pointer;
+}
 </style>
