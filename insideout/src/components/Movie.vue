@@ -1,20 +1,23 @@
 <template>
   <div>
+    <!-- CAROUSEL SECTION -->
     <section>
       <h2>Carousel</h2>
     </section>
+
+    <!-- MOVIE SECTION -->
     <section>
       <div id='head'>
         <h2>Movie</h2>
         <nav>
-          <div>Popular</div>
-          <div>Recent</div>
+          <div @click="isClicked('popular')" :class="{selected:popularClicked}">Popular</div>
+          <div @click="isClicked('recent')" :class="{selected:recentClicked}">Recent</div>
         </nav>
       </div>
 
       <div>
-        <movie-popular/>
-        <movie-recent/>
+        <movie-popular v-if="popularClicked"/>
+        <movie-recent v-if="recentClicked"/>
       </div>
     </section>
   </div>
@@ -26,17 +29,34 @@ import MovieRecent from './MovieRecent.vue'
 
 export default {
   name:'MovieContent',
+  data(){
+    return {
+      popularClicked:true,
+      recentClicked: false,
+    }
+  },
   components:{
     MoviePopular,
     MovieRecent,
   },
   methods:{
-    
+    isClicked(data){
+      if (data==='popular'){
+        this.popularClicked = true
+        this.recentClicked = false
+      } else {
+        this.recentClicked = true
+        this.popularClicked = false
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
+.selected {
+  border-bottom: 3px solid #C3DDEC;
+}
 
 #head {
   margin: 20px 0;
@@ -52,6 +72,7 @@ nav{
 }
 
 nav div{
+  padding: 5px 0;
   font-size: 20px;
   margin: 0 20px;
 }

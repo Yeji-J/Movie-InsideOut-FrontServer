@@ -18,11 +18,9 @@ export default new Vuex.Store({
   mutations: {
     SIGN_UP(state, token){
       state.token = token
-      console.log(state.token)
     },
     GET_MOVIES(state, payload){
       state.movies = payload.splice(10)
-      console.log(state.movies)
     }
   },
   actions: {
