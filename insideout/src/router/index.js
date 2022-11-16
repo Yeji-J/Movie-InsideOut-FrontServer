@@ -4,6 +4,10 @@ import HomeView from '../views/HomeView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import LoginView from '../views/LoginView.vue'
 
+// import MoviePopularView from '../views/MoviePopularView.vue'
+// import MovieRandomView from '../views/MovieRandomView.vue'
+// import MovieRecentView from '../views/MovieRecentView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,7 +27,23 @@ const routes = [
     path: '/login',
     name:'LoginView',
     component: LoginView,
-  }
+  },
+  // {
+  //   path: '/popular',
+  //   name: 'MoviePopularView',
+  //   component: MoviePopularView,
+  // },
+  // {
+  //   path:'/random',
+  //   name: 'MovieRandomView',
+  //   component: MovieRandomView,
+    
+  // },
+  // {
+  //   path:'/recents',
+  //   name:'MovieRecentView',
+  //   component: MovieRecentView,
+  // }
   // {
   //   path: '/about',
   //   name: 'about',

@@ -1,32 +1,41 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |          
-      <router-link :to="{name:'LoginView'}">Login</router-link> | 
-      <router-link :to="{name:'SignUpView'}">Sign Up</router-link>
-    </nav>
+  <v-app>
+    <v-app-bar
+      app
+      color="dark"
+      dark
+    >
+      <!-- <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn> -->
+    </v-app-bar>
 
-
-
-    <router-view/>
-  </div>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
+<script>
+
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+  
+};
+</script>
+
 <style>
-#app {
-  text-align: center;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+*{
+  background-color: #353A40;
+  color: #F8F9FA;
 }
 </style>

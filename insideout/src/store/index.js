@@ -3,12 +3,15 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const API_URL = 'http://127.0.0.1:8000'
+const MOVIE_API_URL = 'https://api.themoviedb.org/3/movie/'
+const API_KEY = 'd9e39572aa5b5519e4f503f2b30ca989'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     token:null,
+    movies:null,
   },
   getters: {
   },
@@ -19,6 +22,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    // SIGN_UP
     signUp(context, payload){
       const username = payload.username;
       const password1 = payload.password1;
@@ -40,8 +44,29 @@ export default new Vuex.Store({
         .catch((err)=>{
           console.log(err)
         });
-    }
+    },
+    // GET_MOVIES
+    getMovies(commit, payload){
+      axios({
+        method:'get',
+        url: `${MOVIE_API_URL}/${payload}`,
+        params:{
+          api_key : API_KEY,
+          page:3
+        }
+      })
+       .then((res)=>{
+        axios({
+          method:'post',
+          url: `${API_URL}/movies/`
+        })
+       })
+       .catch((err)=>{
+        console.log(err)
+       })
+    },
   },
   modules: {
-  }
+  },
+
 })
