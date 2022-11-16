@@ -1,20 +1,60 @@
 <template>
   <div id="app">
+    <!-- nav bar -->
     <nav>
-      <router-link to="/">Home</router-link> |          
-      <router-link :to="{name:'LoginView'}">Login</router-link> | 
-      <router-link :to="{name:'SignUpView'}">Sign Up</router-link>
+      <router-link :to="{name:'home'}">Home</router-link>
+      <div id="modal" @click="openModal">Login/SignUp</div>        
     </nav>
 
-
+    <!-- login/signup Modal -->
+    <ModalView v-if="isModalViewed" @close-modal="isModalViewed=false">
+      <modal-view-content/>
+    </ModalView>
 
     <router-view/>
   </div>
 </template>
 
+<script>
+import ModalView from './components/ModalView.vue';
+import ModalViewContent from './components/ModalViewContent.vue';
+
+export default {
+  components:{
+    ModalView,
+    ModalViewContent,
+  },
+  data(){
+    return {
+      isModalViewed: false,
+    }
+  },
+  methods:{
+    openModal(){
+      this.isModalViewed = true;
+      this.$router.push({name:'LoginView'})
+    }
+  }
+}
+</script>
+
 <style>
+
+*{
+  background-color:#353A40;
+  color: #F8F9FA;
+}
+
+a {
+  text-decoration: none;
+}
+
 #app {
   text-align: center;
+}
+
+#modal:hover{
+  cursor: pointer;
 }
 
 nav {
@@ -27,6 +67,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #C3DDEC;
 }
 </style>

@@ -44,6 +44,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+*{
+  background-color: #ffffff00;
+}
+
+div{
+  width: 300px;
+}
 
 </style>
