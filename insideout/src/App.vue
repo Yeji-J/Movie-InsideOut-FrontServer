@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <div id="appbar">
-      <img src="@/assets/logo.png" alt="logo" id="logo"/>
+      <router-link :to="{name:'home'}"><img src="@/assets/logo.png" alt="logo" id="logo"/></router-link>
       <v-tabs>
-        <v-tab>HOME</v-tab>
+        <v-tab><router-link :to="{name:'home'}">HOME</router-link></v-tab>
         <v-tab>COMMUNITY</v-tab>
         <div id="login">LOGIN/SIGNUP</div>
       </v-tabs>
@@ -87,11 +87,8 @@ div.v-slide-group__content{
   align-items: center;
 }
 
-
-
 #logo{
   margin: 20px 0 0 40px;
   width: 170px;
 }
-
 </style>

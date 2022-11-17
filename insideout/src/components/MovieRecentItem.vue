@@ -1,6 +1,7 @@
 <template>
   <div id="homeMovie">
-    <img :src="imgSrc" alt="" />
+    <img :src="imgSrc"
+    @click="goDetail(movie.movie_id)"/>
     <span class="genre"
       >{{ movie.release_date.split("-")[0] }} /
       {{ movie.genres[0]["name"] }}</span
@@ -20,6 +21,11 @@ export default {
   props: {
     movie: Object,
   },
+  methods:{
+    goDetail(movieId){
+      this.$router.push({name:'DetailView', params:{id:movieId}})
+    }
+  }
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>Detail</h1>
     <div id="headContainer">
-      {{movie.title}}
-      <img :src="imgSrc" alt="">
-      <img :src="backdropImgSrc" alt="">
+      <div id="backdrop">
+        <img :src="backdropImgSrc">
+      </div>
     </div>
+    <!-- <img :src="imgSrc" class="poster"> -->
   </div>
 </template>
 
@@ -26,12 +26,28 @@ export default {
   },
   created(){
     this.$store.dispatch('getDetail', this.$route.params.id)
-  }
+  },
+  // 새로고침했을 때 데이터를 불러올 수 있는 방법은 ~  ?
+  // updated(){
+  //   this.$store.dispatch('getDetail', this.$route.params.id)
+  // }
 }
 </script>
 
 <style scoped>
-img{
+
+#backdrop{
+  margin: 40px 0;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+}
+
+#backdrop img{
+  width: 100%;
+  opacity: 50%;
+}
+.poster{
   width: 100px;
 }
 
