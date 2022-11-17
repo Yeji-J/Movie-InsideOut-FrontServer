@@ -7,7 +7,7 @@
     >
     </v-app-bar>
 
-    <v-main>
+    <v-main id="app">
       <router-view/>
     </v-main>
   </v-app>
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style>
-*{
+#app{
   background-color: #353A40;
   color: #F8F9FA;
 }
