@@ -1,71 +1,85 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue"
+import Vuex from "vuex"
+import axios from "axios"
 
-const API_URL = 'http://127.0.0.1:8000'
-const MOVIE_API_URL = 'https://api.themoviedb.org/3/movie/'
-const API_KEY = 'd9e39572aa5b5519e4f503f2b30ca989'
+const API_URL = "http://127.0.0.1:8000"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token:null,
-    movies:null,
+    token: null,
+    movies: null,
+    moviesPopular: null,
+    moviesRecent: null,
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
-    SIGN_UP(state, token){
+    SIGN_UP(state, token) {
       state.token = token
     },
-    GET_MOVIES(state, payload){
-      state.movies = payload.splice(10)
-    }
+    GET_MOVIES(state, payload) {
+      const sortValue = payload.sorted
+
+      if (sortValue === undefined) {
+        state.movies = payload.movies
+      } else if (sortValue === "popular") {
+        state.moviesPopular = payload.movies
+      } else if (sortValue === "recent") {
+        state.moviesRecent = payload.movies
+      }
+    },
   },
   actions: {
     // SIGN_UP
-    signUp(context, payload){
-      const username = payload.username;
-      const password1 = payload.password1;
-      const password2 = payload.password2;
+    signUp(context, payload) {
+      const username = payload.username
+      const password1 = payload.password1
+      const password2 = payload.password2
 
       axios({
-        method:'post',
+        method: "post",
         url: `${API_URL}/accounts/signup/`,
-        data:{
+        data: {
           username,
           password1,
-          password2
-        }
+          password2,
+        },
       })
-        .then((res)=>{
+        .then((res) => {
           // 생성된 토큰 넘겨주기
-          context.commit('SIGN_UP', res.data.key)
+          context.commit("SIGN_UP", res.data.key)
         })
-        .catch((err)=>{
+        .catch((err) => {
           console.log(err)
-        });
+        })
     },
     // GET_MOVIES
-    getMovies(context, payload){
-      axios({
-        method:'get',
-        url: `${MOVIE_API_URL}/${payload}`,
-        params:{
-          api_key : API_KEY,
-          page:3
+    getMovies(context, payload) {
+      let params = null
+
+      if (payload) {
+        params = {
+          sorted: payload,
         }
+      }
+
+      axios({
+        method: "get",
+        url: `${API_URL}/movies/`,
+        params: params,
       })
-       .then((res)=>{
-        context.commit('GET_MOVIES', res.data.results)
-       })
-       .catch((err)=>{
-        console.log(err)
-       })
+        .then((res) => {
+          const moviePayload = {
+            sorted: payload,
+            movies: res.data,
+          }
+          context.commit("GET_MOVIES", moviePayload)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
-  modules: {
-  },
-
+  modules: {},
 })

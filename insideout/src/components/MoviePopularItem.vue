@@ -1,43 +1,45 @@
 <template>
   <div id="homeMovie">
-    <img :src="imgSrc"/>
-    <span class="genre">{{movie?.release_date.split('-')[0]}} / {{movie?.genre_ids[0]}}</span>
+    <img :src="imgSrc" />
+    <span class="genre"
+      >{{ movie?.release_date.split("-")[0] }} /
+      {{ movie?.genres[0]["name"] }}</span
+    >
     <span class="movieTitle">{{ movie?.title }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name:'MoviePopularItem',
-  data(){
-    return{
+  name: "MoviePopularItem",
+  data() {
+    return {
       imgSrc: `https://image.tmdb.org/t/p/original${this.movie.poster_path}`,
     }
   },
-  props:{
-    movie:Object,
+  props: {
+    movie: Object,
   },
-  
 }
 </script>
 
 <style>
-#homeMovie{
+#homeMovie {
   margin: 10px 20px;
   width: 130px;
   display: flex;
   flex-direction: column;
-  color: #F8F9FA;
+  color: #f8f9fa;
 }
 
-#homeMovie img{
+#homeMovie img {
   width: 100%;
   border-radius: 10px;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.205);
-  transition: transform .5s;
+  transition: transform 0.5s;
 }
 
-#homeMovie img:hover{
+#homeMovie img:hover {
   cursor: pointer;
   transform: scale(1.15);
 }
@@ -45,15 +47,14 @@ export default {
 #homeMovie span {
   margin-left: 10px;
 }
-#homeMovie .genre{
-  color: #C3DDEC;
+#homeMovie .genre {
+  color: #c3ddec;
   margin-top: 10px;
   font-size: 12px;
 }
 
-#homeMovie .movieTitle{
+#homeMovie .movieTitle {
   font-size: 14px;
   margin-bottom: 20px;
 }
-
 </style>

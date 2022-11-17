@@ -1,53 +1,60 @@
 <template>
   <div>
-    <div id='head'>
+    <div id="head">
       <h1>Movie</h1>
       <nav>
-        <div @click="isClicked('popular')" :class="{selected:popularClicked}">Popular</div>
-        <div @click="isClicked('recent')" :class="{selected:recentClicked}">Recent</div>
+        <div
+          @click="isClicked('popular')"
+          :class="{ selected: popularClicked }"
+        >
+          Popular
+        </div>
+        <div @click="isClicked('recent')" :class="{ selected: recentClicked }">
+          Recent
+        </div>
       </nav>
     </div>
 
     <div>
-      <movie-popular v-if="popularClicked"/>
-      <movie-recent v-if="recentClicked"/>
+      <movie-popular v-if="popularClicked" />
+      <movie-recent v-if="recentClicked" />
     </div>
   </div>
 </template>
 
 <script>
-import MoviePopular from './MoviePopular.vue'
-import MovieRecent from './MovieRecent.vue'
+import MoviePopular from "./MoviePopular.vue"
+import MovieRecent from "./MovieRecent.vue"
 
 export default {
-  name:'MovieContent',
-  data(){
+  name: "MovieContent",
+  data() {
     return {
-      popularClicked:true,
+      popularClicked: true,
       recentClicked: false,
     }
   },
-  components:{
+  components: {
     MoviePopular,
     MovieRecent,
   },
-  methods:{
-    isClicked(data){
-      if (data==='popular'){
+  methods: {
+    isClicked(data) {
+      if (data === "popular") {
         this.popularClicked = true
         this.recentClicked = false
       } else {
         this.recentClicked = true
         this.popularClicked = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
 .selected {
-  border-bottom: 3px solid #C3DDEC;
+  border-bottom: 3px solid #c3ddec;
 }
 
 #head {
@@ -59,18 +66,18 @@ export default {
   align-items: baseline;
 }
 
-nav{
+nav {
   display: flex;
 }
 
-nav div{
+nav div {
   padding: 5px 0;
   font-size: 20px;
   margin: 0 20px;
   transition: transform 0.2s linear;
 }
 
-nav div:hover{
+nav div:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
