@@ -8,9 +8,7 @@
         <div id="login">LOGIN/SIGNUP</div>
       </v-tabs>
     </div>
-    <v-main id="app">
-      <router-view/>
-    </v-main>
+    <router-view/>
   </v-app>
 </template>
 
