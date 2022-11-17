@@ -1,6 +1,6 @@
 <template>
   <div id="carousel">
-    <carousel-3d  :controls-visible="true" :controls-prev-html="'&#10092; '" 
+    <carousel-3d :controls-visible="true" :controls-prev-html="'&#10092; '" 
     :controls-next-html="'&#10093;'" 
     :controls-width="30" :controls-height="60" :clickable="false">
       <slide v-for="(movie, i) in movies" 
@@ -30,48 +30,30 @@ export default {
       return this.$store.state.movies
       
     }
-  }
+  },
+
 }
 </script>
 
 <style scoped>
-*{
-  background-color:#F8F9FA;
-  color: red
-}
 
 #carousel{
-  margin: 150px auto;
+  margin: 100px auto;
+  margin-bottom: 150px;
 }
 div.carousel-3d-container {
-  background-color:#353A40;
+  background-color: #23262b;
 }
 
 div.carousel-3d-slide{
+  background-color:#F8F9FA;
+
   border-radius: 10px;
   border:none;
   transition: transform .5s;
-
+  box-shadow: 0 10px 15px 0 #000000;
 }
-
-.carousel-3d-slide:hover{
+div.carousel-3d-slide:hover{
   cursor: pointer;
 }
-
-
-/* .carousel-3d-container figcaption {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  bottom: 0;
-  position: absolute;
-  bottom: 0;
-  padding: 15px;
-  font-size: 12px;
-  min-width: 100%;
-  box-sizing: border-box;
-} */
-
-
-
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id='head'>
-      <h2>Movie</h2>
+      <h1>Movie</h1>
       <nav>
         <div @click="isClicked('popular')" :class="{selected:popularClicked}">Popular</div>
         <div @click="isClicked('recent')" :class="{selected:recentClicked}">Recent</div>
@@ -67,9 +67,11 @@ nav div{
   padding: 5px 0;
   font-size: 20px;
   margin: 0 20px;
+  transition: transform 0.2s linear;
 }
 
 nav div:hover{
   cursor: pointer;
+  transform: scale(1.05);
 }
 </style>

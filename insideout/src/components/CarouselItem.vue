@@ -2,11 +2,10 @@
   <div id="carouselItem">
     <img :src="imgSrc">
     <div id="carouselContent">
-      <h7>{{movie.title}}</h7>
-      <hr>
-      <div>Genre</div>
-      <div>Release Date</div>
-      <div>Runtime</div>
+      <div><h6>{{movie.title}}</h6></div>
+      <p>Genre |</p>
+      <p>Release Date | {{movie.release_date}}</p>
+      <p>Runtime | </p>
     </div>
   </div>
 </template>
@@ -26,23 +25,16 @@ export default {
 </script>
 
 <style scoped>
-*{
-  background-color:#f8f9fad3;
-  color: #353A40;
-}
 
 #carouselItem{
   display: flex;
-
+  color: #353A40;
 }
-
-/* #carouselItem:hover{
-  transform-origin: center center;
-} */
 
 img{
   width: 51%;
 }
+
 
 #carouselContent{
   width: 49%;
@@ -50,6 +42,12 @@ img{
 }
 
 #carouselContent div{
+  border-bottom: 1px solid #353a4050;
+}
+
+#carouselContent p{
   font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 </style>
