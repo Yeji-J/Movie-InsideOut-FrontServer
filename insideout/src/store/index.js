@@ -10,8 +10,10 @@ export default new Vuex.Store({
   state: {
     token: null,
     movies: null,
+    movie:null,
     moviesPopular: null,
     moviesRecent: null,
+
   },
   getters: {},
   mutations: {
@@ -29,6 +31,10 @@ export default new Vuex.Store({
         state.moviesRecent = payload.movies
       }
     },
+    GET_DETAIL(state, payload) {
+      state.movie = payload
+      console.log(state.movie)
+    }
   },
   actions: {
     // SIGN_UP
@@ -80,6 +86,20 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // GET MOVIE DETAIL
+    getDetail(context, movieId){
+      axios({
+        method: "get",
+        url: `${API_URL}/movies/${movieId}/`,
+      })
+        .then((res)=>{
+          context.commit("GET_DETAIL", res.data)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+
+    }
   },
   modules: {},
 })

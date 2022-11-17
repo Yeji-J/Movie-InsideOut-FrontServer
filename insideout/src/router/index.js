@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import LoginView from '../views/LoginView.vue'
+import DetailView from '../views/DetailView.vue'
 
 // import MoviePopularView from '../views/MoviePopularView.vue'
 // import MovieRandomView from '../views/MovieRandomView.vue'
@@ -28,6 +29,11 @@ const routes = [
     name:'LoginView',
     component: LoginView,
   },
+  {
+    path: '/detail/:id',
+    name:'DetailView',
+    component: DetailView,
+  }
   // {
   //   path: '/popular',
   //   name: 'MoviePopularView',
