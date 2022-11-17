@@ -27,19 +27,26 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 #app{
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   background-color: #23262b;
   color: #F8F9FA;
 }
 
 div.v-tabs{
-  padding: 20px 40px 0 0;
+  margin: 20px 40px 0 0;
 }
 
 div.v-slide-group__wrapper{
   background-color: #23262b;
   color:#C3DDEC;
+}
+
+div.v-tab{
+  margin-left: 5px;
 }
 
 div.v-slide-group__content{
@@ -50,11 +57,29 @@ div.v-slide-group__content{
 }
 
 #login {
-  padding: 3px;
+  padding: 4.5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
   color: #353A40;
+  width: 100px;
   height: 30px;
   background-color: #C3DDEC;
   border-radius: 10px;
+  margin-right: 20px;
+  box-shadow: 0 0 3px 3px #35383a;
+  transition: transform 0.1s;
+}
+
+#login:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+#login:active {
+  background-color: #C3DDEC;
+  box-shadow: 0 5px rgb(97, 97, 97)83a;
+  transform: translateY(4px);
 }
 
 #appbar{
@@ -62,13 +87,11 @@ div.v-slide-group__content{
   align-items: center;
 }
 
-#login:hover{
-  cursor: pointer;
-}
+
 
 #logo{
   margin: 20px 0 0 40px;
-  width: 180px;
+  width: 170px;
 }
 
 </style>
