@@ -1,16 +1,13 @@
 <template>
   <div id="carousel">
-    <carousel-3d :controls-visible="true" :controls-prev-html="'&#10092; '" 
-    :controls-next-html="'&#10093;'" 
-    :controls-width="30" :controls-height="60" :clickable="false">
+    <carousel-3d @after-slide-change="onAfterSlideChange" @before-slide-change="onBeforeSlideChange" @last-slide="onLastSlide"
+    :autoplay="true" :autoplay-timeout="2300">
       <slide v-for="(movie, i) in movies" 
       :index="i"
-      :key="i">
-        <figure>
-          <carousel-item :movie="movie"/>
-        </figure>
+      :key="movie.id">
+        <carousel-item :movie="movie"/>
       </slide>
-  </carousel-3d>
+    </carousel-3d>
   </div>
 </template>
 

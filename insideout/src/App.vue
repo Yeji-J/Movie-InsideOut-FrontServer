@@ -1,11 +1,13 @@
 <template>
   <v-app>
-    <v-tabs>
-      <v-tab>HOME</v-tab>
-      <v-tab>COMMUNITY</v-tab>
-      <div id="login">LOGIN/SIGNUP</div>
-    </v-tabs>
-    
+    <div id="appbar">
+      <img src="@/assets/logo.png" alt="logo" id="logo"/>
+      <v-tabs>
+        <v-tab>HOME</v-tab>
+        <v-tab>COMMUNITY</v-tab>
+        <div id="login">LOGIN/SIGNUP</div>
+      </v-tabs>
+    </div>
     <v-main id="app">
       <router-view/>
     </v-main>
@@ -55,8 +57,18 @@ div.v-slide-group__content{
   border-radius: 10px;
 }
 
+#appbar{
+  display:flex;
+  align-items: center;
+}
+
 #login:hover{
   cursor: pointer;
+}
+
+#logo{
+  margin: 20px 0 0 40px;
+  width: 180px;
 }
 
 </style>
