@@ -4,7 +4,15 @@
     :style="{'background-image':' linear-gradient(rgba(0, 0, 0,0.5), rgba(0, 0, 0,0.5)),url('+ backdropImgSrc +')'}"
     style="background-size:cover">
       <div id="backdrop-content">
-        <v-rating
+        
+        <p class="movie-title">{{movie.title}}</p>
+        <div class="overview">{{movie.overview}}</div>
+      </div>
+    </section>
+      <img :src="imgSrc" class="poster">
+
+    <section id="movie-detail">
+      <v-rating
           class="rating"
           background-color="amber"
           :value="movie.vote_average / 2"
@@ -14,13 +22,12 @@
           readonly
           size="22"
         ></v-rating>
-        <p class="movie-title">{{movie.title}}</p>
-        <div class="overview">{{movie.overview}}</div>
-      </div>
-    </section>
-      <img :src="imgSrc" class="poster">
-
-    <section id="movie-detail">
+      <div><span>Genres | </span>{{movie.genres}}</div>
+      <div><span>Release Date | </span>{{movie.release_date}}</div>
+      <div><span>Actors | </span> {{movie.actors}}</div>
+      <!-- <h5>adult</h5>
+      <h5>like icon</h5> -->
+      <div><span>Vote Count | </span>{{movie.vote_count}}</div>
     </section>
   </div>
 
@@ -56,7 +63,7 @@ export default {
 #backdrop{
   min-width: 780px;
   height: 550px;
-  margin: 40px 0;
+  margin-top: 40px;
   overflow:hidden;
 }
 
@@ -80,7 +87,18 @@ export default {
 }
 
 #movie-detail{
+  height: 500px;
+  padding-left: 450px; 
   position: relative;
+}
+
+#movie-detail div{
+  margin: 20px 0;
+}
+
+#movie-detail div span{
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .movie-title{
