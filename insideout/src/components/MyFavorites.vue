@@ -1,16 +1,14 @@
 <template>
   <div>
-    <h2>My WishList</h2>
+    <h2>Favorites</h2>
     <hr>
   </div>
-  
-  
-
 </template>
 
 <script>
-export default {
-  name: 'MyWishlist'
+export default {  
+  name:'MyFavorites',
+
 }
 </script>
 

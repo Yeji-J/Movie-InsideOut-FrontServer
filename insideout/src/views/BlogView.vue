@@ -6,15 +6,15 @@
         <div><span>123</span><span>123</span><span>123</span></div>
         <div style="font-size:10px"><span>Reviews</span><span>Followers</span><span>Following</span></div>
       </div>
-      <div class="bar-item" @click="isClicked('wishlist')" :class="{'is-selected': this.wishlist}">Movie Wishlist</div>
+      <div class="bar-item" @click="isClicked('favorites')" :class="{'is-selected': this.favorites}">Favorites</div>
+      <div class="bar-item" @click="isClicked('watchlist')" :class="{'is-selected': this.watchlist}">Watchlist</div>
       <div class="bar-item" @click="isClicked('reviews')" :class="{'is-selected': this.reviews}">My Review</div>
-      <div class="bar-item" @click="isClicked('movies')" :class="{'is-selected': this.movies}">Like Movies</div>
       <div class="bar-item" @click="isClicked('history')" :class="{'is-selected': this.history}">Movie History</div>
     </div>
     <div id="content" style="padding: 50px 90px;">
-      <my-wishlist v-if="this.wishlist"/>
+      <my-watchlist v-if="this.witchlist"/>
       <my-review v-if="this.reviews"/>
-      <my-movie v-if="this.movies"/>
+      <my-favorites v-if="this.movies"/>
       <my-history v-if="this.history"/>
     </div>
   </div>
@@ -22,47 +22,47 @@
 
 <script>
 import MyReview from '../components/MyReview.vue'
-import MyWishlist from '../components/MyWishlist.vue'
-import MyMovie from '../components/MyMovie.vue'
+import MyWatchlist from '../components/MyWatchlist.vue'
+import MyFavorites from '../components/MyFavorites.vue'
 import MyHistory from '../components/MyHistory.vue'
 
 export default {
   name:'BlogView',
   components:{
-    MyWishlist,
+    MyWatchlist,
     MyReview,
-    MyMovie,
+    MyFavorites,
     MyHistory,
   },
   data(){
     return{
-      wishlist:true,
+      watchlist:true,
       reviews:false,
-      movies:false,
+      favorites:false,
       history: false,
     }
   },
   methods:{
     isClicked(params){
-      if (params==='wishlist'){
-        this.wishlist=true
+      if (params==='watchlist'){
+        this.watchlist=true
         this.reviews=false
-        this.movies=false
+        this.favorites=false
         this.history=false
       } else if (params==='reviews'){
-        this.wishlist=false
+        this.watchlist=false
         this.reviews=true
-        this.movies=false
+        this.favorites=false
         this.history=false
       } else if (params==='movies'){
-        this.wishlist=false
+        this.watchlist=false
         this.reviews=false
-        this.movies=true
+        this.favorites=true
         this.history=false
       } else {
-        this.wishlist=false
+        this.watchlist=false
         this.reviews=false
-        this.movies=false
+        this.favorites=false
         this.history=true
       }
     }

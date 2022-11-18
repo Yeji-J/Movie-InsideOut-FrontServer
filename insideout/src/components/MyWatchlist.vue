@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h2>Like Movies</h2>
+    <h2>WatchList</h2>
     <hr>
   </div>
+  
+  
+
 </template>
 
 <script>
-export default {  
-  name:'MyMovie',
-
+export default {
+  name: 'MyWatchlist'
 }
 </script>
 
