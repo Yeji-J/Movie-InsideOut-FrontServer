@@ -39,7 +39,8 @@ export default {
   margin-bottom: 150px;
 }
 div.carousel-3d-container {
-  background-color: #23262b;
+  background: none;
+  overflow: visible;
 }
 
 div.carousel-3d-slide{

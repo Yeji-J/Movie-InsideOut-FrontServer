@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="login-modal">
     <h1>Login</h1>
   </div>
 </template>
@@ -10,6 +10,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+#login-modal{
+color: #23262b;
+}
+
 
 </style>

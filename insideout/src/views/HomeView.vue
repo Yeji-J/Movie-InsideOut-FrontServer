@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 id="banner">Your weekend buddy for this week</h1>
+    
     <carousel-content />
     <movie-content />
   </div>
@@ -9,6 +10,7 @@
 <script>
 import MovieContent from "@/components/Movie.vue"
 import CarouselContent from "@/components/Carousel.vue"
+
 
 export default {
   name: "HomeView",

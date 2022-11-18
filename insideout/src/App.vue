@@ -5,22 +5,35 @@
       <v-tabs>
         <v-tab><router-link :to="{name:'home'}">HOME</router-link></v-tab>
         <v-tab>COMMUNITY</v-tab>
-        <div id="login">LOGIN/SIGNUP</div>
+        <div id="login" @click="isModalViewed=true">LOGIN/SIGNUP</div>
       </v-tabs>
     </div>
+
+    <modal-view
+    id="modalView"
+    v-if="isModalViewed"
+    @close-modal="isModalViewed=false">
+      <modal-view-content/>
+    </modal-view>
     <router-view/>
   </v-app>
 </template>
 
 <script>
+import ModalView from '@/components/ModalView.vue'
+import ModalViewContent from '@/components/ModalViewContent.vue'
 
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  }),
-  
+  data(){
+    return {
+      isModalViewed: false,
+    }
+  },
+  components: {
+    ModalView,
+    ModalViewContent
+  },  
 };
 </script>
 
@@ -32,6 +45,12 @@ export default {
 #app{
   background-color: #23262b;
   color: #F8F9FA;
+  position: relative;
+}
+
+#modalView{
+  position: absolute;
+
 }
 
 div.v-tabs{

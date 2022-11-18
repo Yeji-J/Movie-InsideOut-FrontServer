@@ -29,9 +29,9 @@
 <script>
 export default {
   name:'CarouselItem',
-  data(){
-    return{
-      imgSrc: `https://image.tmdb.org/t/p/original${this.movie.poster_path}`,
+  computed:{
+    imgSrc(){
+      return `https://image.tmdb.org/t/p/original${this.movie.poster_path}`
     }
   },
   props:{
