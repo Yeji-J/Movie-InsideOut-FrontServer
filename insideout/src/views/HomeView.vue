@@ -18,7 +18,7 @@ export default {
     MovieContent,
     CarouselContent,
   },
-  created() {
+  beforeCreate() {
     this.$store.dispatch("getMovies") // main
     this.$store.dispatch("getMovies", "popular") // popular
   },

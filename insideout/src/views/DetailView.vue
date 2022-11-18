@@ -86,11 +86,11 @@ export default {
       return `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`
     },
   },
-  created(){
+  beforeCreate(){
     this.$store.dispatch('getDetail', this.$route.params.id)
   },
   // 새로고침했을 때 데이터를 불러올 수 있는 방법은 ~  ?
-  // updated(){
+  // mounted(){
   //   this.$store.dispatch('getDetail', this.$route.params.id)
   // }
 }

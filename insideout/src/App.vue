@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import ModalView from '@/components/ModalView.vue'
 import ModalViewContent from '@/components/ModalViewContent.vue'
+import ModalView from '@/components/ModalView.vue'
 
 export default {
   name: 'App',
@@ -31,8 +31,8 @@ export default {
     }
   },
   components: {
-    ModalView,
-    ModalViewContent
+    ModalViewContent,
+    ModalView
   },  
 };
 </script>

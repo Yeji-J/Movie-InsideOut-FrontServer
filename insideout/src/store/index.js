@@ -17,7 +17,7 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
-    SIGN_UP(state, token) {
+    SAVE_TOKEN(state, token) {
       state.token = token
     },
     GET_MOVIES(state, payload) {
@@ -33,7 +33,6 @@ export default new Vuex.Store({
     },
     GET_DETAIL(state, payload) {
       state.movie = payload
-      console.log(state.movie)
     }
   },
   actions: {
@@ -54,11 +53,31 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // 생성된 토큰 넘겨주기
-          context.commit("SIGN_UP", res.data.key)
+          context.commit("SAVE_TOKEN", res.data.key)
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    // Login
+    login(context, payload) {
+      const username = payload.username
+      const password = payload.password
+
+      axios({
+        method: "post",
+        url: `${API_URL}/accounts/login/`,
+        data: {
+          username,
+          password,
+        }
+      })
+      .then((res) => {
+        context.commit("SAVE_TOKEN", res.data.key)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     },
     // GET_MOVIES
     getMovies(context, payload) {

@@ -1,6 +1,6 @@
 <template>
-  <div id="modal-content">
-    <div class="modal-content-half"></div>
+  <div id="modal-content" >
+    <div class="modal-content-half" ></div>
     <div id="forms">
       <div id="buttons">
         <span :class="{is_selected:loginViewed}"
@@ -23,8 +23,8 @@ export default {
   name:'ModalViewContent',
   data(){
     return{
-      loginViewed : false,
-      signupViewed : true,
+      loginViewed : true,
+      signupViewed : false,
     }
   },
   components: { 
@@ -59,7 +59,7 @@ a{
   margin: 0;
   width: 50%;
   min-height: 500px;
-  background-color:#c3ddecd0;
+  background-color:#C3DDEC;
   border-radius: 10px 0 0 10px;;
 }
 
@@ -84,7 +84,7 @@ a{
 }
 
 .is_selected{
-  border-bottom: 1px solid #c3ddecd0;
+  border-bottom: 1px solid #C3DDEC;
 }
 
 #forms{
