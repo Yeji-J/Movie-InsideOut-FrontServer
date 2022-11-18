@@ -5,7 +5,11 @@
       <v-tabs>
         <v-tab><router-link :to="{name:'home'}">HOME</router-link></v-tab>
         <v-tab>COMMUNITY</v-tab>
-        <div id="login" @click="isModalViewed=true">LOGIN/SIGNUP</div>
+        <!-- 토큰 여부에 따라 login / logout 버튼 교체 -->
+        <div id="logout" v-if="this.$store.state.token">LOGOUT</div>
+        <div id="login" v-else-if="!this.$store.state.token"
+        @click="isModalViewed=true"
+        >LOGIN/SIGNUP</div>
       </v-tabs>
     </div>
 
@@ -73,6 +77,7 @@ div.v-slide-group__content{
   align-items: center;
 }
 
+#logout,
 #login {
   padding: 4.5px;
   text-align: center;
