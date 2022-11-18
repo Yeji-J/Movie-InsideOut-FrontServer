@@ -39,9 +39,9 @@ export default {
   border-radius: 10px;
   min-height: 500px;
   position: relative;
-  min-width: 700px;
+  min-width: 800px;
   margin: 100px 25vw;
-  background-color: #F8F9FA;
+  background-color: #23262b;
   z-index:10;
   /* opacity: 3; */
 }

@@ -1,19 +1,18 @@
 <template>
-  <div>
-    <h1>SignUp</h1>
-    <form @submit.prevent="signUp">
-      <label for="username">username : </label>
-      <input type="text" id="username" v-model="username">  <br>
 
-      <label for="password1">password : </label>
-      <input type="password" id="password1" v-model="password1"> <br>
-      
-      <label for="password2">password confirmation : </label>  
-      <input type="password" id="password2" v-model="password2">  <br>
+  <form @submit.prevent="signUp">
+    <label for="username">Username </label>
+    <input type="text" id="username" v-model="username">  <br>
 
-      <input type="submit" value="Sign Up">
-    </form>
-  </div>
+    <label for="password1">Password </label>
+    <input type="password" id="password1" v-model="password1"> <br>
+    
+    <label for="password2">Password confirmation </label>  
+    <input type="password" id="password2" v-model="password2">  <br>
+
+    <input type="submit" value="Sign Up" class="signup-btn">
+  </form>
+
 </template>
 
 <script>
@@ -45,5 +44,52 @@ export default {
 </script>
 
 <style>
+label{
+  font-size: 25px;
+}
+
+label{
+  margin-top: 20px;
+}
+
+#username,
+#password1,
+#password2,
+#password{
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid #c3ddecd0;
+}
+
+
+.signup-btn,
+.login-btn{
+  margin-top: 50px;
+  margin-left: 135px;
+  padding: 4.5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #353A40;
+  width: 80px;
+  height: 40px;
+  background-color: #C3DDEC;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 3px #35383a;
+  transition: transform 0.1s;
+}
+.signup-btn:hover,
+.login-btn:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.signup-btn:active,
+.login-btn:active {
+  background-color: #C3DDEC;
+  box-shadow: 0 5px rgb(97, 97, 97)83a;
+  transform: translateY(4px);
+}
+
 
 </style>
