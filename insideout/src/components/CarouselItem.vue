@@ -6,6 +6,7 @@
       <p>Genre |</p>
       <p>Release Date | {{movie.release_date}}</p>
       <p>Runtime | </p>
+      <button @click="goDetail(movie.movie_id)">MORE</button>
     </div>
   </div>
 </template>
@@ -21,6 +22,11 @@ export default {
   props:{
     movie:Object,
   },
+  methods:{
+    goDetail(movieId){
+      this.$router.push({name:'DetailView', params:{id:movieId}})
+    }
+  }
 }
 </script>
 
