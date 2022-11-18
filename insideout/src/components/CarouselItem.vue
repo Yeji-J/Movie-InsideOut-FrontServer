@@ -16,9 +16,9 @@
     ></v-rating>
       <hr>
       <p>Genre | {{ movie?.genres[0]["name"] }}</p>
-      <p>Release Date | {{movie.release_date}}</p>
-      <p>Vote Count | {{movie.vote_count}}</p>
-      <button @click="goDetail(movie.movie_id)">MORE</button>
+      <p>Release Date | {{movie?.release_date}}</p>
+      <p>Vote Count | {{movie?.vote_count}}</p>
+      <button @click="goDetail(movie?.movie_id)">MORE</button>
       <hr>
       
     </div>
@@ -30,7 +30,6 @@
 export default {
   name:'CarouselItem',
   data(){
-    console.log(this.movie)
     return{
       imgSrc: `https://image.tmdb.org/t/p/original${this.movie.poster_path}`,
     }
