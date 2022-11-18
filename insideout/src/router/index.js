@@ -2,10 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
-
-// import MoviePopularView from '../views/MoviePopularView.vue'
-// import MovieRandomView from '../views/MovieRandomView.vue'
-// import MovieRecentView from '../views/MovieRecentView.vue'
+import BlogView from '@/views/BlogView.vue'
 
 Vue.use(VueRouter)
 
@@ -19,23 +16,14 @@ const routes = [
     path: '/detail/:id',
     name:'DetailView',
     component: DetailView,
+  },
+  {
+    // username dynamic params => /:str
+    path: '/blog',
+    name: 'blog',
+    component: BlogView,
   }
-  // {
-  //   path: '/popular',
-  //   name: 'MoviePopularView',
-  //   component: MoviePopularView,
-  // },
-  // {
-  //   path:'/random',
-  //   name: 'MovieRandomView',
-  //   component: MovieRandomView,
-    
-  // },
-  // {
-  //   path:'/recents',
-  //   name:'MovieRecentView',
-  //   component: MovieRecentView,
-  // }
+
   // {
   //   path: '/about',
   //   name: 'about',

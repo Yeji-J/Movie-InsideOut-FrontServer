@@ -4,7 +4,8 @@
       <router-link :to="{name:'home'}"><img src="@/assets/logo.png" alt="logo" id="logo"/></router-link>
       <v-tabs>
         <v-tab><router-link :to="{name:'home'}" style="text-decoration: none; color:#C3DDEC ">HOME</router-link></v-tab>
-        <v-tab style="color:#C3DDEC" class="m-5">COMMUNITY</v-tab>
+        <v-tab style="color:#C3DDEC">COMMUNITY</v-tab>
+        <v-tab><router-link :to="{name:'blog'}" style="text-decoration: none; color:#C3DDEC">MY BLOG</router-link></v-tab>
         <!-- 토큰 여부에 따라 login / logout 버튼 교체 -->
         <div id="logout" v-if="this.$store.state.token">LOGOUT</div>
         <div id="login" v-else-if="!this.$store.state.token"
@@ -20,6 +21,9 @@
       <modal-view-content/>
     </modal-view>
     <router-view/>
+    <footer>
+      © 2022. insideout Co. all rights reserved.
+    </footer>
   </v-app>
 </template>
 
@@ -79,6 +83,7 @@ div.v-slide-group__content{
 
 #logout,
 #login {
+  margin: 10px;
   padding: 9.5px 0;
   text-align: center;
   font-weight: bold;
@@ -112,5 +117,15 @@ div.v-slide-group__content{
 #logo{
   margin: 20px 0 0 40px;
   width: 170px;
+}
+
+footer{
+  margin-top: 30px;
+  color:#5e6572;
+  width: 100%;
+  height: 10vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
