@@ -24,12 +24,17 @@
             readonly
             size="22"
           ></v-rating>
-        <div><span>Genres | </span>{{movie.genres}}</div>
-        <div><span>Release Date | </span>{{movie.release_date}}</div>
-        <div><span>Actors | </span> {{movie.actors}}</div>
+        <div><span class="detail-title">Genres | </span> 
+          <span 
+          class="detail-genre"
+          v-for="(genre, idx) in movie.genres"
+          :key="idx">{{genre.name}}</span>
+        </div>
+        <div><span class="detail-title">Release Date | </span>{{movie.release_date}}</div>
+        <div><span class="detail-title">Actors | </span> {{movie.actors}}</div>
         <!-- <h5>adult</h5>
         <h5>like icon</h5> -->
-        <div><span>Vote Count | </span>{{movie.vote_count}}</div>
+        <div><span class="detail-title">Vote Count | </span>{{movie.vote_count}}</div>
       </div>
     </section>
 
@@ -79,7 +84,7 @@ export default {
     },
     backdropImgSrc(){
       return `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`
-    }
+    },
   },
   created(){
     this.$store.dispatch('getDetail', this.$route.params.id)
@@ -115,6 +120,17 @@ export default {
 
 }
 
+.movie-title{
+  min-width: 500px;
+  font-size: 60px;
+}
+
+.overview{
+  min-width: 500px;
+  width: 600px;
+  font-size: 15px;
+}
+
 .poster{
   width: 230px;
   border-radius: 10px;
@@ -133,22 +149,14 @@ export default {
   margin: 30px 0;
 }
 
-.movie-detail-content div span{
+.movie-detail-content div .detail-title{
   font-size: 18px;
   font-weight: bold;
 }
 
-.movie-title{
-  min-width: 500px;
-  font-size: 60px;
+.detail-genre{
+  margin: 0 7px;
 }
-
-.overview{
-  min-width: 500px;
-  width: 600px;
-  font-size: 15px;
-}
-
 
 
 /* section 3 */
