@@ -45,10 +45,7 @@ export default {
 
 <style>
 label{
-  font-size: 25px;
-}
-
-label{
+  font-size: 20px;
   margin-top: 20px;
 }
 
@@ -65,8 +62,7 @@ label{
 .signup-btn,
 .login-btn{
   margin-top: 50px;
-  margin-left: 135px;
-  padding: 4.5px;
+  margin-left: 270px;
   text-align: center;
   font-weight: bold;
   font-size: 18px;
@@ -77,6 +73,10 @@ label{
   border-radius: 10px;
   box-shadow: 0 0 3px 3px #35383a;
   transition: transform 0.1s;
+}
+
+.login-btn{
+  margin-top: 150px;
 }
 .signup-btn:hover,
 .login-btn:hover{

@@ -64,7 +64,7 @@ a{
 }
 
 #buttons{
-  padding-left: 110px;
+  padding-left: 150px;
 }
 
 #buttons span{

@@ -3,8 +3,8 @@
     <div id="appbar">
       <router-link :to="{name:'home'}"><img src="@/assets/logo.png" alt="logo" id="logo"/></router-link>
       <v-tabs>
-        <v-tab><router-link :to="{name:'home'}">HOME</router-link></v-tab>
-        <v-tab>COMMUNITY</v-tab>
+        <v-tab><router-link :to="{name:'home'}" style="text-decoration: none; color:#C3DDEC ">HOME</router-link></v-tab>
+        <v-tab style="color:#C3DDEC" class="m-5">COMMUNITY</v-tab>
         <!-- 토큰 여부에 따라 login / logout 버튼 교체 -->
         <div id="logout" v-if="this.$store.state.token">LOGOUT</div>
         <div id="login" v-else-if="!this.$store.state.token"
@@ -79,13 +79,13 @@ div.v-slide-group__content{
 
 #logout,
 #login {
-  padding: 4.5px;
+  padding: 9.5px 0;
   text-align: center;
   font-weight: bold;
   font-size: 13px;
   color: #353A40;
   width: 100px;
-  height: 30px;
+  height: 40px;
   background-color: #C3DDEC;
   border-radius: 10px;
   margin-right: 20px;
