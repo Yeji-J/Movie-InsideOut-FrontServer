@@ -14,6 +14,8 @@
     <section id="movie-detail">
       <img :src="imgSrc" class="poster">
       <div class="movie-detail-content" style="min-width: 500px; margin-left: 600px;">
+        
+        <!-- RATINGS -->
         <v-rating
             class="rating"
             background-color="amber"
@@ -24,20 +26,27 @@
             readonly
             size="22"
           ></v-rating>
+
+        <!-- GENRES -->
         <div><span class="detail-title">Genres | </span> 
-          <span 
-          style="margin: 0 7px;"
-          v-for="(genre, idx) in movie.genres"
-          :key="idx">{{genre.name}}</span>
+          <span style="margin: 0 7px;"
+          v-for="(genre, idx) in movie.genres" :key="idx">{{genre.name}}</span>
         </div>
+
         <div><span class="detail-title">Release Date | </span>{{movie.release_date}}</div>
-        <div><span class="detail-title">Actors | </span> {{movie.actors}}</div>
+
+        <!-- ACTORS -->
+        <div><span class="detail-title">Actors  | </span > 
+          <span style="margin: 0 7px;"
+          v-for="(actor, idx) in movie.actors" :key="idx">{{actor.name}}</span>
+        </div>
         <!-- <h5>adult</h5>
         <h5>like icon</h5> -->
+
         <div><span class="detail-title">Vote Count | </span>{{movie.vote_count}}</div>
       </div>
     </section>
-
+    
     <!-- MOVIE REVIEW LIST AND REVIEW FORM -->
     <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px;">
       <span style="font-size: 30px; margin: 0 20px;">Reviews</span>
@@ -45,28 +54,10 @@
       <hr>
 
       <!-- REVIEW FORM -->
-      <form v-if="this.isFormViewed">
-        <h4 style="display:inline-block; margin-right: 20px;">{{movie.title}}</h4>
-          <v-rating
-          class="rating"
-          @hover="giveRating"
-          :value="this.rating"
-          background-color="amber"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="22"
-          style="display:inline-block"
-        ></v-rating>
-        <textarea name="" id="" cols="30" rows="10" placeholder="Write your review !"></textarea>
-        <input type="submit" value="write"
-        style="padding: 2px 7px;">
-      </form>
+      <detail-review-form v-if="isFormViewed" :movie="movie"/>
 
       <!-- REVIEW LIST -->
       <div id="reivew-list">
-
       </div>
     </section>
   </div>
@@ -74,9 +65,13 @@
 </template>
 
 <script>
+import DetailReviewForm from '../components/DetailReviewForm.vue'
 
 export default {
   name:'DetailView',
+  components:{
+    DetailReviewForm
+  },
   data(){
     return {
       isFormViewed:false,
@@ -161,69 +156,4 @@ export default {
   font-size: 18px;
   font-weight: bold;
 }
-
-/* section 3 */
-
-form{
-  min-width: 500px;
-  border-radius: 10px;
-  border: 0.5px solid #F8F9FA;
-  padding: 20px 40px;
-}
-
-.form-btn{
-  padding: 7px; 
-  font-size: 13px; 
-  display:inline-block;
-}
-.form-btn,
-input[type=submit]{
-  border: 1px solid #F8F9FA; 
-  transition: transform 0.3;
-  border-radius: 10px; 
-}
-.form-btn:hover,
-input[type=submit]:hover{
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.form-btn:active,
-input[type=submit]:active{
-  transform: translateY(4px);
-}
-
-textarea{
-  color:#F8F9FA;
-  width:500px; 
-  max-height:60px; 
-  font-size:17px; 
-  padding: 10px; 
-  margin-top: 20px;
-  margin-right: 30px;
-  border:0;
-  resize: none;
-}
-
-textarea:hover{
-  border-bottom: solid 1px #F8F9FA;
-}
-
-textarea:focus{
-  outline: none;
-  caret-color: #F8F9FA;
-}
-
-textarea::-webkit-scrollbar {
-    width: 10px;
-  }
-textarea::-webkit-scrollbar-thumb {
-  background-color:#C3DDEC;
-  border-radius: 10px;
-  background-clip: padding-box;
-  border: 2px solid transparent;
-  box-shadow: inset 0 0 2px #c3ddecc5;
-}
-
-
 </style>

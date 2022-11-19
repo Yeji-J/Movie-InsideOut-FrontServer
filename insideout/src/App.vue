@@ -98,11 +98,13 @@ div.v-slide-group__content{
   transition: transform 0.1s;
 }
 
+#logout:hover,
 #login:hover{
   cursor: pointer;
   transform: scale(1.05);
 }
 
+#logout:active,
 #login:active {
   background-color: #C3DDEC;
   box-shadow: 0 5px rgb(97, 97, 97)83a;
