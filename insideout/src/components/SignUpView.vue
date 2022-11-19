@@ -2,13 +2,13 @@
 
   <form @submit.prevent="signUp">
     <label for="username">Username </label>
-    <input type="text" id="username" v-model="username">  <br>
+    <input type="text" id="username" v-model="username" class="userInput">  <br>
 
     <label for="password1">Password </label>
-    <input type="password" id="password1" v-model="password1"> <br>
+    <input type="password" id="password1" v-model="password1" class="userInput"> <br>
     
     <label for="password2">Password confirmation </label>  
-    <input type="password" id="password2" v-model="password2">  <br>
+    <input type="password" id="password2" v-model="password2" class="userInput">  <br>
 
     <input type="submit" value="Sign Up" class="signup-btn">
   </form>
@@ -91,5 +91,15 @@ label{
   transform: translateY(4px);
 }
 
+input[type=text]:focus{
+  outline: none;
+  caret-color: #F8F9FA;
+  color: #F8F9FA;
+}
 
+.userInput:focus{
+  outline: none;
+  caret-color: #F8F9FA;
+  color: #F8F9FA;
+}
 </style>

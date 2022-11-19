@@ -17,22 +17,22 @@
         
 <!-- RATINGS -->
         <v-rating
-            style="display:inline-block; margin-bottom: 5px;"
-            class="rating"
-            background-color="amber"
-            :value="movie.vote_average/2"
-            color="amber"
-            dense
-            half-increments
-            readonly
-            size="22"
-          ></v-rating>
+        style="display:inline-block; margin-bottom: 5px;"
+        class="rating"
+        background-color="amber"
+        :value="movie.vote_average/2"
+        color="amber"
+        dense
+        half-increments
+        readonly
+        size="22"
+      ></v-rating>
 
 <!-- ADULT -->
         <span 
         v-if="movie.adult"
         style="display:inline-block; background-color:#851717; padding: 3px 5px;
-        border-radius: 10px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
+        border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
         19</span>
 
 <!-- GENRES -->
@@ -61,11 +61,11 @@
       <hr>
 
 <!-- REVIEW FORM -->
-      <detail-review-form v-if="isFormViewed" :movie="movie"/>
+      <detail-review-form v-if="isFormViewed" :movie="movie"
+      style="margin-bottom: 20px;"/>
 
 <!-- REVIEW LIST -->
-      <div id="reivew-list">
-      </div>
+      <detail-review-list :reviews="movie.reviews"/>
     </section>
   </div>
 
@@ -73,11 +73,13 @@
 
 <script>
 import DetailReviewForm from '../components/DetailReviewForm.vue'
+import DetailReviewList from '../components/DetailReviewList.vue'
 
 export default {
   name:'DetailView',
   components:{
-    DetailReviewForm
+    DetailReviewForm,
+    DetailReviewList
   },
   data(){
     return {

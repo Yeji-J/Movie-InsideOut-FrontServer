@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="login">
     <label for="username">Username </label>
-    <input type="text" id="username" v-model="username">  <br>
+    <input type="text" id="username" v-model="username" class="userInput">  <br>
 
     <label for="password">Password </label>
-    <input type="password" id="password" v-model="password"> <br>
+    <input type="password" id="password" v-model="password" class="userInput"> <br>
 
     <input type="submit" value="Login" class="login-btn"
     @click="checkLogin">
@@ -45,6 +45,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>

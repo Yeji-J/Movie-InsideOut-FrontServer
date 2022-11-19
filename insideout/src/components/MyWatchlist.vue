@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>WatchList</h2>
+    <h2>Watchlist</h2>
     <hr>
   </div>
 </template>

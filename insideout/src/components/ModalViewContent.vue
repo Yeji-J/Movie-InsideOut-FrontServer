@@ -88,7 +88,7 @@ a{
 }
 
 #forms{
-  width: 50%;
+  max-width: 50%;
   padding: 20px;
   padding-bottom: 35px;
 }
