@@ -3,9 +3,6 @@
     <h2>WatchList</h2>
     <hr>
   </div>
-  
-  
-
 </template>
 
 <script>

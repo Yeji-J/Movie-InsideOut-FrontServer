@@ -1,5 +1,6 @@
 <template>
   <div id="blog">
+    <!-- SIDEBAR -->
     <div id="sidebar">
       <span>Hello, <span style="font-size: 24px ">Username</span></span>
       <div class="profile" style="background-color:#c3ddecd0; width: 100%;">
@@ -11,10 +12,12 @@
       <div class="bar-item" @click="isClicked('reviews')" :class="{'is-selected': this.reviews}">My Review</div>
       <div class="bar-item" @click="isClicked('history')" :class="{'is-selected': this.history}">Movie History</div>
     </div>
+
+    <!-- CONTENT -->
     <div id="content" style="padding: 50px 90px;">
-      <my-watchlist v-if="this.witchlist"/>
+      <my-watchlist v-if="this.watchlist"/>
       <my-review v-if="this.reviews"/>
-      <my-favorites v-if="this.movies"/>
+      <my-favorites v-if="this.favorites"/>
       <my-history v-if="this.history"/>
     </div>
   </div>
@@ -36,9 +39,9 @@ export default {
   },
   data(){
     return{
-      watchlist:true,
+      favorites:true,
+      watchlist:false,
       reviews:false,
-      favorites:false,
       history: false,
     }
   },
@@ -54,7 +57,7 @@ export default {
         this.reviews=true
         this.favorites=false
         this.history=false
-      } else if (params==='movies'){
+      } else if (params==='favorites'){
         this.watchlist=false
         this.reviews=false
         this.favorites=true
