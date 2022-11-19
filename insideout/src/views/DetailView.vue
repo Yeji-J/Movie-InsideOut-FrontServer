@@ -13,8 +13,15 @@
 <!-- MOVIE POSTER AND DETAIL -->
     <section id="movie-detail">
       <img :src="imgSrc" class="poster">
+
+<!-- LIKES -->
+      <font-awesome-icon icon="fa-solid fa-heart" 
+      v-if="isLiked==true" class="heart-btn fa-2x" @click="likeClicked"/>
+      <font-awesome-icon icon="fa-regular fa-heart" 
+      v-if="isLiked==false" class='heart-btn fa-2x' @click="likeClicked"/>
+      
+
       <div class="movie-detail-content" style="min-width: 500px; margin-left: 600px;">
-        
 <!-- RATINGS -->
         <v-rating
         style="display:inline-block; margin-bottom: 5px;"
@@ -84,6 +91,7 @@ export default {
   data(){
     return {
       isFormViewed:false,
+      isLiked:false,
     }
   },
   computed:{
@@ -110,6 +118,9 @@ export default {
         btnText.innerText = 'Hide Form'
       }
     },
+    likeClicked(){
+      this.isLiked = !this.isLiked
+    }
   },
   beforeCreate(){
     this.$store.dispatch('getDetail', this.$route.params.id)
@@ -139,7 +150,6 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
-
 }
 
 .overview{
@@ -157,6 +167,19 @@ export default {
   top: 620px;
 }
 
+.heart-btn{
+  position: absolute;
+  color: #ec407a;
+  top: 920px;
+  left: 485px;
+  transition: transform 0.2s linear;
+}
+
+.heart-btn:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
 .movie-detail-content div {
   margin: 30px 0;
 }
@@ -164,5 +187,7 @@ export default {
 .movie-detail-content div .detail-title{
   font-size: 18px;
   font-weight: bold;
+  top: 20px;
+  left: 0;
 }
 </style>
