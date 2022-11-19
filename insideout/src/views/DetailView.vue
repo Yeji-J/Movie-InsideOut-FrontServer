@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 0 auto;">
-    <!-- BACKDROP IMAGE AND MOVIE OVERVIEW -->
+<!-- BACKDROP IMAGE AND MOVIE OVERVIEW -->
     <section id="backdrop" 
     :style="{'background-image':' linear-gradient(rgba(0, 0, 0,0.5), rgba(0, 0, 0,0.5)),url('+ backdropImgSrc +')'}"
     style="background-size:cover">
@@ -10,13 +10,14 @@
       </div>
     </section>
 
-    <!-- MOVIE POSTER AND DETAIL -->
+<!-- MOVIE POSTER AND DETAIL -->
     <section id="movie-detail">
       <img :src="imgSrc" class="poster">
       <div class="movie-detail-content" style="min-width: 500px; margin-left: 600px;">
         
-        <!-- RATINGS -->
+<!-- RATINGS -->
         <v-rating
+            style="display:inline-block; margin-bottom: 5px;"
             class="rating"
             background-color="amber"
             :value="movie.vote_average/2"
@@ -27,7 +28,14 @@
             size="22"
           ></v-rating>
 
-        <!-- GENRES -->
+<!-- ADULT -->
+        <span 
+        v-if="movie.adult"
+        style="display:inline-block; background-color:#851717; padding: 3px 5px;
+        border-radius: 10px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
+        19</span>
+
+<!-- GENRES -->
         <div><span class="detail-title">Genres | </span> 
           <span style="margin: 0 7px;"
           v-for="(genre, idx) in movie.genres" :key="idx">{{genre.name}}</span>
@@ -35,28 +43,27 @@
 
         <div><span class="detail-title">Release Date | </span>{{movie.release_date}}</div>
 
-        <!-- ACTORS -->
+<!-- ACTORS -->
         <div><span class="detail-title">Actors  | </span > 
           <span style="margin: 0 7px;"
           v-for="(actor, idx) in movie.actors" :key="idx">{{actor.name}}</span>
         </div>
-        <!-- <h5>adult</h5>
-        <h5>like icon</h5> -->
+        <!-- <h5>like icon</h5> -->
 
         <div><span class="detail-title">Vote Count | </span>{{movie.vote_count}}</div>
       </div>
     </section>
     
-    <!-- MOVIE REVIEW LIST AND REVIEW FORM -->
+<!-- MOVIE REVIEW LIST AND REVIEW FORM -->
     <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px;">
       <span style="font-size: 30px; margin: 0 20px;">Reviews</span>
       <span class="form-btn" @click="formClicked">Write Review</span>
       <hr>
 
-      <!-- REVIEW FORM -->
+<!-- REVIEW FORM -->
       <detail-review-form v-if="isFormViewed" :movie="movie"/>
 
-      <!-- REVIEW LIST -->
+<!-- REVIEW LIST -->
       <div id="reivew-list">
       </div>
     </section>
