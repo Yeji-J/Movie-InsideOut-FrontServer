@@ -1,6 +1,6 @@
 <template>
   <div id="community">
-    <section id="board" style="width: fit-content;">
+    <section id="board" style="width: fit-content; padding: 40px;">
 
       <div>
         <h4>Hot Reviewers</h4>
@@ -16,13 +16,13 @@
         <h4>Recent Reviews</h4>
         <hr>
         <div v-for="reviewer in reviewers" :key="reviewer.id" class="sidebox">
-          <div style="height: 22px; width: 140px; overflow:hidden;">{{reviewer?.overview}}</div> ... 
+          <div style="height: 22px; width: 180px; overflow:hidden;">{{reviewer?.overview}}</div>...
           <div class="numbox">{{reviewer?.vote_count}}</div>
         </div>
       </div>
     </section>
 
-    <section id="article" style="width:fit-content;">
+    <section id="article" style="width:fit-content; padding-top: 70px;">
       <community-article/>
     </section>
   </div>
@@ -55,10 +55,8 @@ export default {
   align-items: center;
 }
 section{
-  margin: 80px 20px 20px 0;
+  margin-top:80px;
   height: 100vh;
-  border: 1px solid white;
-  padding: 30px;
 }
 
 .sidebox{
@@ -74,5 +72,6 @@ section{
   width: 40px; 
   text-align: center;
   color:#C3DDEC;
+  margin: 0 10px;
 }
 </style>

@@ -7,7 +7,7 @@
     <div class=card-container>
       <div class="cardbox"
       v-for="movie in movies" :key="movie.id">
-        <img class="card-img-top" :src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`">
+        <img :src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`">
         <h6 style="text-align:center; width: 50%;">
         {{movie.title}}</h6>
       </div>
