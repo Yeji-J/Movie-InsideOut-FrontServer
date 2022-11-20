@@ -33,13 +33,15 @@ export default {
       this.$store.dispatch('login', payload)
     },
     checkLogin(){
-      if (this.$store.state.token){
+      const userString = localStorage.getItem('user')
+
+      if (userString){
         window.location.reload()
       } else {
         alert('login failed !')
       }
     }
-    
+  
   }
 }
 </script>

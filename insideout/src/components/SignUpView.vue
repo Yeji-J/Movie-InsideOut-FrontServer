@@ -16,6 +16,10 @@
 </template>
 
 <script>
+import axios from "axios"
+
+const API_URL = "http://127.0.0.1:8000"
+
 export default {
   name:'SignupView',
   data(){
@@ -37,7 +41,17 @@ export default {
         password2
       }
 
-      this.$store.dispatch('signUp', payload)
+      axios({
+        method: "post",
+        url: `${API_URL}/accounts/signup/`,
+        data: payload,
+      })
+        .then(() => {
+          this.$store.dispatch('login', {username, password: password1})
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

@@ -7,7 +7,7 @@
         <v-tab style="color:#C3DDEC">COMMUNITY</v-tab>
         <v-tab><router-link :to="{name:'blog'}" style="text-decoration: none; color:#C3DDEC">MY BLOG</router-link></v-tab>
         <!-- 토큰 여부에 따라 login / logout 버튼 교체 -->
-        <div id="logout" v-if="this.$store.state.token">LOGOUT</div>
+        <div id="logout" v-if="this.$store.state.token" @click="logout">LOGOUT</div>
         <div id="login" v-else-if="!this.$store.state.token"
         @click="isModalViewed=true"
         >LOGIN/SIGNUP</div>
@@ -41,7 +41,12 @@ export default {
   components: {
     ModalViewContent,
     ModalView
-  },  
+  },
+  methods: {
+    logout(){
+      this.$store.commit('LOGOUT')
+    }
+  }  
 };
 </script>
 
