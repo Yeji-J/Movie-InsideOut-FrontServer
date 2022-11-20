@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form id="reviewForm">
     <h4 style="display:inline-block; margin-right: 20px;">{{movie.title}}</h4>
 
     <!-- RATINGS -->
@@ -12,7 +12,7 @@
     <textarea cols="30" rows="10" placeholder="Write your review !"></textarea>
     
     <input type="submit" value="write" class="review-btn"
-    style="padding: 2px 7px;">
+    style="padding: 2px 7px; margin: 10px">
   </form>
 </template>
 
@@ -34,9 +34,9 @@ export default {
 </script>
 
 <style>
-form{
+#reviewForm{
   margin: 0 auto;
-  width: 900px;
+  width: 830px;
   min-width: 500px;
   border-radius: 10px;
   border: 0.5px solid #F8F9FA;
@@ -45,12 +45,12 @@ form{
 
 textarea{
   color:#F8F9FA;
-  width:700px;
+  width:650px;
   min-width: 300px; 
   max-height:60px; 
   font-size:17px; 
   padding: 10px; 
-  margin-top: 20px;
+  margin: 20px;
   margin-right: 30px;
   border:0;
   resize: none;
@@ -67,7 +67,12 @@ textarea:focus{
 
 textarea::-webkit-scrollbar {
     width: 10px;
-  }
+}
+
+textarea::-webkit-scrollbar-corner{
+  display:none;
+}
+
 textarea::-webkit-scrollbar-thumb {
   background-color:#C3DDEC;
   border-radius: 10px;

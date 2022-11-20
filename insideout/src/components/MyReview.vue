@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h2>My Review</h2>
+    <h2>
+      <font-awesome-icon icon="fa-solid fa-comment-dots"
+      style="color:#b39ddb; margin: 0 10px;"/>
+      My Review</h2>
     <hr>
   </div>
   

@@ -1,6 +1,8 @@
 <template>
   <div id="history">
-    <h2>Movie History</h2>
+    <h2><font-awesome-icon icon="fa-solid fa-film" 
+      style="margin: 0 10px; color:#5d99c6;"/>
+      Movie History</h2>
     <hr>
     <div class=card-container>
       <div class="cardbox"
@@ -46,7 +48,7 @@ export default {
 }
 
 .card-container::-webkit-scrollbar-thumb {
-  background-color:#C3DDEC;
+  background-color:#c3ddecd0;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
