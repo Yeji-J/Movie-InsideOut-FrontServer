@@ -2,10 +2,14 @@
   <v-app>
     <div id="appbar">
       <router-link :to="{name:'home'}"><img src="@/assets/logo.png" alt="logo" id="logo"/></router-link>
+      
       <v-tabs>
         <v-tab><router-link :to="{name:'home'}" style="text-decoration: none; color:#C3DDEC ">HOME</router-link></v-tab>
-        <v-tab style="color:#C3DDEC">COMMUNITY</v-tab>
+        
+        <v-tab style="color:#C3DDEC"><router-link :to="{name:'community'}" style="text-decoration: none; color:#C3DDEC ">COMMUNITY</router-link></v-tab>
+        
         <v-tab><router-link :to="{name:'blog'}" style="text-decoration: none; color:#C3DDEC">MY BLOG</router-link></v-tab>
+        
         <!-- 토큰 여부에 따라 login / logout 버튼 교체 -->
         <div id="logout" v-if="userToken" @click="logout">LOGOUT</div>
         <div id="login" v-else-if="!userToken"
@@ -70,7 +74,6 @@ export default {
 
 #modalView{
   position: absolute;
-
 }
 
 div.v-tabs{

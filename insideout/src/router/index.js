@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import BlogView from '@/views/BlogView.vue'
+import CommunityView from '@/views/CommunityView.vue'
 
 Vue.use(VueRouter)
 
@@ -18,15 +19,21 @@ const routes = [
     component: DetailView,
   },
   {
+    path: '/community',
+    name: 'community',
+    component: CommunityView,
+  },
+  {
     // username dynamic params => /:str
     path: '/blog',
     name: 'blog',
     component: BlogView,
-  }
+  },
+
 
   // {
-  //   path: '/about',
-  //   name: 'about',
+  //   path: '/blog',
+  //   name: 'blog',
   //   // route level code-splitting
   //   // this generates a separate chunk (about.[hash].js) for this route
   //   // which is lazy-loaded when the route is visited.

@@ -81,7 +81,7 @@ export default {
 #blog {
   display:flex;
   justify-content: center;
-  margin-top: 7vh;
+  margin-top: 120px;
 }
 
 #sidebar,
