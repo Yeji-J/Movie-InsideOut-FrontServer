@@ -1,5 +1,5 @@
 <template>
-  <div id="carouselItem">
+  <div id="carouselItem" @click="goDetail(movie?.movie_id)">
     <img :src="imgSrc">
     <div id="carouselContent">
       <h6 style="font-weight:bold">{{movie.title}}</h6>
@@ -18,7 +18,7 @@
       <p>Genre | {{ movie?.genres[0]["name"] }}</p>
       <p>Release Date | {{movie?.release_date}}</p>
       <p>Vote Count | {{movie?.vote_count}}</p>
-      <button @click="goDetail(movie?.movie_id)">MORE</button>
+      <button >TEASER</button>
       <hr>
       
     </div>
@@ -50,6 +50,12 @@ export default {
 #carouselItem{
   display: flex;
   color: #353A40;
+  transition: all 0.2s linear;
+}
+
+#carouselItem:hover{
+  cursor:pointer;
+  transform: scale(1.2)
 }
 
 img{
@@ -72,7 +78,7 @@ img{
   margin-left: 3px;
 }
 
-/* more button */
+/* TEASER button */
 button{
   margin: 12px 40px;
   padding: 2px;
@@ -89,7 +95,7 @@ button{
 
 button:hover{
   cursor: pointer;
-  transform: scale(1.4);
+  background-color:#C3DDEC;
 }
 
 hr{

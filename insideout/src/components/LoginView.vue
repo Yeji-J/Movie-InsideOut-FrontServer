@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="login">
-    <label for="username">Username </label>
+    <label for="username"><font-awesome-icon icon="fa-solid fa-user" />Username </label>
     <input type="text" id="username" v-model="username" class="userInput">  <br>
 
-    <label for="password">Password </label>
+    <label for="password"><font-awesome-icon icon="lock" />Password </label>
     <input type="password" id="password" v-model="password" class="userInput"> <br>
 
     <input type="submit" value="Login" class="login-btn">

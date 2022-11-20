@@ -1,6 +1,8 @@
 <template>
   <div id="modal-content" >
-    <div class="modal-content-half" ></div>
+    <div class="modal-content-half">
+      <img src="@/assets/darkLogo.png" style="width: 300px; margin: 40px;">
+    </div>
     <div id="forms">
       <div id="buttons">
         <span :class="{is_selected:loginViewed}"
@@ -56,7 +58,6 @@ a{
 }
 
 .modal-content-half{
-  margin: 0;
   width: 50%;
   min-height: 500px;
   background-color:#C3DDEC;

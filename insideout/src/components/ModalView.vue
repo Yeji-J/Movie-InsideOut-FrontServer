@@ -33,6 +33,7 @@ export default {
 .overlay {
   opacity: 0.5;
   background-color: black;
+  z-index:10;
 }
 
 .modal-card{
@@ -40,9 +41,8 @@ export default {
   min-height: 500px;
   position: relative;
   min-width: 800px;
-  margin: 100px 25vw;
+  margin: 150px 26vw;
   background-color: #23262b;
   z-index:10;
-  /* opacity: 3; */
 }
 </style>

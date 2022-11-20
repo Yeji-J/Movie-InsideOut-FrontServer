@@ -9,10 +9,13 @@
       </div>
       <div class="bar-item" @click="isClicked('favorites')" :class="{'is-selected': this.favorites}">
         <font-awesome-icon icon="fa-solid fa-heart" style="margin-right: 10px;"/> Favorites</div>
+        
       <div class="bar-item" @click="isClicked('watchlist')" :class="{'is-selected': this.watchlist}">
         <font-awesome-icon icon="fa-solid fa-clapperboard" style="margin-right: 10px;"/>Watchlist</div>
+
       <div class="bar-item" @click="isClicked('reviews')" :class="{'is-selected': this.reviews}">
         <font-awesome-icon icon="fa-solid fa-comment-dots" style="margin-right: 10px;"/>My Review</div>
+        
       <div class="bar-item" @click="isClicked('history')" :class="{'is-selected': this.history}">
         <font-awesome-icon icon="fa-solid fa-film" style="margin-right: 10px;"/>Movie History</div>
     </div>

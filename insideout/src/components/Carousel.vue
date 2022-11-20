@@ -45,13 +45,8 @@ div.carousel-3d-container {
 
 div.carousel-3d-slide{
   background-color:#F8F9FA;
-
   border-radius: 10px;
   border:none;
-  transition: transform .5s;
   box-shadow: 0 10px 15px 0 #000000;
-}
-div.carousel-3d-slide:hover{
-  cursor: pointer;
 }
 </style>
