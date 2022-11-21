@@ -27,7 +27,7 @@
         style="display:inline-block; margin-bottom: 5px;"
         class="rating"
         background-color="amber"
-        :value="movie?.vote_average/2"
+        :value="vote"
         color="amber"
         dense
         half-increments
@@ -40,7 +40,7 @@
         v-if="movie?.adult"
         style="display:inline-block; background-color:#851717; padding: 3px 5px;
         border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
-        19</span>
+      19</span>
 
 <!-- GENRES -->
         <div><span class="detail-title">Genres | </span> 
@@ -96,6 +96,9 @@ export default {
   computed:{
     movie(){
       return this.$store.state.movie
+    },
+    vote(){
+      return this.movie?.vote_average/2
     },
     imgSrc(){
       return `https://image.tmdb.org/t/p/original${this.movie?.poster_path}`

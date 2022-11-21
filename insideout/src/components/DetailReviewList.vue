@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-for="review in reviews" :key="review?.id" style="display: flex; flex-direction: column;">
+    <div
+    v-for="review in reviews" :key="review?.id" style="display: flex; flex-direction: column;">
       <detail-review-list-item :review="review"/>
       <hr>
     </div>
@@ -15,9 +16,19 @@ export default {
   components:{
     DetailReviewListItem,
   },
-  props:{
-    reviews:Array
+  computed:{
+    reviews(){
+      return this.$store.state.reviews
+    }
   },
+  methods:{
+    getReviews(){
+      this.$store.dispatch('getReviews', this.$route.params.id)
+    }
+  },
+  beforeCreate(){
+    this.$store.dispatch('getReviews', this.$route.params.id)
+  }
 }
 
 </script>

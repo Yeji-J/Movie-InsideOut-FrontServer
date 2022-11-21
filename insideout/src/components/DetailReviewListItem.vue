@@ -3,7 +3,7 @@
     <div>
       <div style="display:flex; justify-content:space-between">
             <div>
-              {{review?.username}} | 
+              {{review?.user_id}} | 
               <v-rating
               style="display:inline-block; margin-bottom: 5px;"
               class="rating"
@@ -53,7 +53,8 @@ export default {
   methods:{
     updateReview(){
       this.reviewId = !this.reviewId;
-    }
+    },
+
   },
 }
 </script>

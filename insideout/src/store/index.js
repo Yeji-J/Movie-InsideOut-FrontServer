@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
+
 // 일단 comment 완성하려고 토큰 저장
 // import createPersistedState from "vuex-persistedstate"
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     moviesPopular: null,
     moviesRecent: null,
     movieLike:null,
+    reviews:null,
   },
   getters: {},
   mutations: {
@@ -47,7 +49,11 @@ export default new Vuex.Store({
     GET_DETAIL(state, payload) {
       state.movie = payload.data
       state.movieLike = payload.is_liked
-    }
+    },
+
+    GET_REVIEWS(state, payload) {
+      state.reviews = payload
+    },
   },
 
   actions: {
@@ -116,6 +122,20 @@ export default new Vuex.Store({
         })
 
     },
+    // GET REVIEWS
+    getReviews(context, movieId){
+      axios({
+        method:'get',
+        url: `${API_URL}/movies/${movieId}/reviews/`,
+      })
+        .then((res)=>{
+          context.commit('GET_REVIEWS', res.data)
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    },
     // LIKES
     getLike(context, movieId){
 
@@ -140,7 +160,7 @@ export default new Vuex.Store({
 
       axios({
         method:'post',
-        url: `${API_URL}/movies/${payload.movieId}/reviews/`,
+        url: `${API_URL}/movies/${payload.movieId}/review_create/`,
         data: payload.data,
         headers:{
           Authorization: `JWT ${token}`
@@ -166,7 +186,7 @@ export default new Vuex.Store({
         }
       })
       .then (()=>{
-        location.reload()
+
       })
       .catch((err)=>{
         console.log(err)

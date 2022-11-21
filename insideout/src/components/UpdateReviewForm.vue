@@ -1,6 +1,6 @@
 <template>
   <form id="reviewForm" @submit.prevent="editReview(review)">
-    <span style="font-size: 25px; margin-right: 20px;">{{review.username}}</span>
+    <span style="font-size: 25px; margin-right: 20px;">{{review?.user_id}}</span>
     
     <span class="star">
       ★★★★★
@@ -43,6 +43,7 @@ export default {
       }
 
       this.$store.dispatch('editReview', payload)
+      this.$store.dispatch('getReviews', this.$route.params.id)
     }
   },
   mounted(){
