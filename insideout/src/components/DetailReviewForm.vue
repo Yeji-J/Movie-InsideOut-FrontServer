@@ -1,15 +1,15 @@
 <template>
-  <form id="reviewForm">
-    <span style="font-size: 25px; margin-right: 20px;">{{movie.title}}</span>
+  <form id="reviewForm" @submit.prevent="createReview">
+    <span style="font-size: 25px; margin-right: 20px;">{{movie?.title}}</span>
 
     <!-- RATINGS -->
     <span class="star">
       ★★★★★
       <span>★★★★★</span>
-      <input type="range" @input="drawStar" value="0" step="1" min="0" max="10">
+      <input type="range" @input="drawStar" v-model="vote" step="1" min="0" max="10">
     </span>
     <div>
-      <textarea cols="30" rows="10" placeholder="Write your review !"></textarea>
+      <textarea cols="30" rows="10" placeholder="Write your review !" v-model="content"></textarea>
       <input type="submit" value="write" class="review-btn"
       style="padding: 2px 7px; margin: 10px;">
     </div>
@@ -19,14 +19,30 @@
 <script>
 export default {
   name:'DetailReviewForm',
+  data(){
+    return{
+      vote:0,
+      content: null,
+    }
+  },
   props:{
-    movie:Object
+    movie:Object,
   },
   methods:{
     drawStar(event) {
       document.querySelector('.star span').style.width = `${event.target.value * 15}px`;
       // console.log(document.querySelector('.star input').value)
-  }
+    },
+    createReview(){
+      const payload={
+        movieId:  this.$route.params.id,
+        data:{
+          content:this.content,
+          vote:this.vote,
+        }
+      }
+      this.$store.dispatch('createReview', payload)
+    }
   }
 }
 

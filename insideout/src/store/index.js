@@ -5,6 +5,7 @@ import axios from "axios"
 // import createPersistedState from "vuex-persistedstate"
 
 const API_URL = "http://127.0.0.1:8000"
+const token = localStorage.getItem('user')
 
 Vue.use(Vuex)
 
@@ -18,7 +19,7 @@ export default new Vuex.Store({
     movie:null,
     moviesPopular: null,
     moviesRecent: null,
-
+    movieLike:null,
   },
   getters: {},
   mutations: {
@@ -44,35 +45,12 @@ export default new Vuex.Store({
     },
 
     GET_DETAIL(state, payload) {
-      state.movie = payload
+      state.movie = payload.data
+      state.movieLike = payload.is_liked
     }
   },
 
   actions: {
-    // SIGN_UP
-    // signUp(context, payload) {
-    //   const username = payload.username
-    //   const password1 = payload.password1
-    //   const password2 = payload.password2
-
-    //   axios({
-    //     method: "post",
-    //     url: `${API_URL}/accounts/signup/`,
-    //     data: {
-    //       username,
-    //       password1,
-    //       password2,
-    //     },
-    //   })
-    //     .then((res) => {
-    //       // 생성된 토큰 넘겨주기
-    //       context.commit("SAVE_TOKEN", res.data.key)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // },
-
     // Login
     login(context, payload) {
       const username = payload.username
@@ -122,9 +100,13 @@ export default new Vuex.Store({
     },
     // GET MOVIE DETAIL
     getDetail(context, movieId){
+
       axios({
         method: "get",
         url: `${API_URL}/movies/${movieId}/`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
       })
         .then((res)=>{
           context.commit("GET_DETAIL", res.data)
@@ -133,6 +115,62 @@ export default new Vuex.Store({
           console.log(err)
         })
 
+    },
+    // LIKES
+    getLike(context, movieId){
+
+      axios({
+        method:'get',
+        url: `${API_URL}/movies/${movieId}/like/`,
+        // header에 token 넣어주기
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then((res)=>{
+          context.state.movieLike = res.data.is_liked
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    },
+
+    // CREATE REVIEW
+    createReview(context, payload){
+
+      axios({
+        method:'post',
+        url: `${API_URL}/movies/${payload.movieId}/reviews/`,
+        data: payload.data,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then(()=>{
+          location.reload()
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    },
+    // EDIT REVIEW (UPDATE & DELETE)
+    editReview(context, payload){
+      // payload 값의 value에 따라 method 지정
+
+      axios({
+        url: `${API_URL}/movies/reviews/${payload.id}/`,
+        method: payload.type,
+        data: payload.data,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+      .then (()=>{
+        location.reload()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   },
   modules: {},

@@ -1,10 +1,10 @@
 <template>
   <div id="carousel">
-    <carousel-3d @after-slide-change="onAfterSlideChange" @before-slide-change="onBeforeSlideChange" @last-slide="onLastSlide"
+    <carousel-3d
     :autoplay="true" :autoplay-timeout="2300">
       <slide v-for="(movie, i) in movies" 
       :index="i"
-      :key="movie.id">
+      :key="movie?.id">
         <carousel-item :movie="movie"/>
       </slide>
     </carousel-3d>

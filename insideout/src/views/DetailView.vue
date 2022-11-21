@@ -5,8 +5,8 @@
     :style="{'background-image':' linear-gradient(rgba(0, 0, 0,0.5), rgba(0, 0, 0,0.5)),url('+ backdropImgSrc +')'}"
     style="background-size:cover">
       <div id="backdrop-content">
-        <p style="min-width: 500px; font-size: 60px;">{{movie.title}}</p>
-        <div class="overview">{{movie.overview}}</div>
+        <p style="min-width: 500px; font-size: 60px;">{{movie?.title}}</p>
+        <div class="overview">{{movie?.overview}}</div>
       </div>
     </section>
 
@@ -16,9 +16,9 @@
 
 <!-- LIKES -->
       <font-awesome-icon icon="fa-solid fa-heart" 
-      v-if="isLiked==true" class="heart-btn fa-2x" @click="likeClicked"/>
+      v-if="isLiked==true" class="heart-btn fa-2x" @click="getLike"/>
       <font-awesome-icon icon="fa-regular fa-heart" 
-      v-if="isLiked==false" class='heart-btn fa-2x' @click="likeClicked"/>
+      v-if="isLiked==false" class='heart-btn fa-2x' @click="getLike"/>
       
 
       <div class="movie-detail-content" style="min-width: 500px; margin-left: 600px;">
@@ -27,7 +27,7 @@
         style="display:inline-block; margin-bottom: 5px;"
         class="rating"
         background-color="amber"
-        :value="movie.vote_average/2"
+        :value="movie?.vote_average/2"
         color="amber"
         dense
         half-increments
@@ -37,7 +37,7 @@
 
 <!-- ADULT -->
         <span 
-        v-if="movie.adult"
+        v-if="movie?.adult"
         style="display:inline-block; background-color:#851717; padding: 3px 5px;
         border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
         19</span>
@@ -45,19 +45,19 @@
 <!-- GENRES -->
         <div><span class="detail-title">Genres | </span> 
           <span style="margin: 0 7px;"
-          v-for="(genre, idx) in movie.genres" :key="idx">{{genre.name}}</span>
+          v-for="(genre, idx) in movie?.genres" :key="idx">{{genre.name}}</span>
         </div>
 
-        <div><span class="detail-title">Release Date | </span>{{movie.release_date}}</div>
+        <div><span class="detail-title">Release Date | </span>{{movie?.release_date}}</div>
 
 <!-- ACTORS -->
         <div><span class="detail-title">Actors  | </span > 
           <span style="margin: 0 7px;"
-          v-for="(actor, idx) in movie.actors" :key="idx">{{actor.name}}</span>
+          v-for="(actor, idx) in movie?.actors" :key="idx">{{actor.name}}</span>
         </div>
         <!-- <h5>like icon</h5> -->
 
-        <div><span class="detail-title">Vote Count | </span>{{movie.vote_count}}</div>
+        <div><span class="detail-title">Vote Count | </span>{{movie?.vote_count}}</div>
       </div>
     </section>
     
@@ -72,7 +72,7 @@
       style="margin-bottom: 20px;"/>
 
 <!-- REVIEW LIST -->
-      <detail-review-list :reviews="movie.reviews"/>
+      <detail-review-list :reviews="movie?.reviews"/>
     </section>
   </div>
 
@@ -91,23 +91,21 @@ export default {
   data(){
     return {
       isFormViewed:false,
-      isLiked:false
     }
   },
   computed:{
     movie(){
-
       return this.$store.state.movie
     },
     imgSrc(){
-      return `https://image.tmdb.org/t/p/original${this.movie.poster_path}`
+      return `https://image.tmdb.org/t/p/original${this.movie?.poster_path}`
     },
     backdropImgSrc(){
-      return `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`
+      return `https://image.tmdb.org/t/p/original${this.movie?.backdrop_path}`
     },
-    // isLiked(){
-    //   return 
-    // }
+    isLiked(){
+      return this.$store.state.movieLike
+    }
   },
   methods:{
     // form button 클릭시 form 열고 닫기 (innertext 변경)
@@ -122,8 +120,8 @@ export default {
         btnText.innerText = 'Hide Form'
       }
     },
-    likeClicked(){
-      this.isLiked = !this.isLiked
+    getLike(){
+      this.$store.dispatch('getLike', this.$route.params.id)
     }
   },
   beforeCreate(){

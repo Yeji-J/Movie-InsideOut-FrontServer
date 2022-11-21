@@ -2,11 +2,11 @@
   <div id="carouselItem">
     <img :src="imgSrc">
     <div id="carouselContent">
-      <h6 style="font-weight:bold">{{movie.title}}</h6>
+      <h6 style="font-weight:bold">{{movie?.title}}</h6>
       <v-rating
       class="rating"
       background-color="amber"
-      :value="movie.vote_average / 2"
+      :value="movie?.vote_average / 2"
       color="amber"
       dense
       half-increments
@@ -31,7 +31,7 @@ export default {
   name:'CarouselItem',
   computed:{
     imgSrc(){
-      return `https://image.tmdb.org/t/p/original${this.movie.poster_path}`
+      return `https://image.tmdb.org/t/p/original${this.movie?.poster_path}`
     }
   },
   props:{
