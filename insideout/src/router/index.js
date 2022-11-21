@@ -25,7 +25,7 @@ const routes = [
   },
   {
     // username dynamic params => /:str
-    path: '/blog',
+    path: '/blog/:str',
     name: 'blog',
     component: BlogView,
   },

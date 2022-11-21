@@ -76,7 +76,10 @@ export default {
         this.history=true
       }
     }
-  }
+  },
+  // beforeCreate(){
+  //   this.$store.dispatch('getUserInfo')
+  // }
 }
 </script>
 

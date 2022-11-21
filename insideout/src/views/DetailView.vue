@@ -39,7 +39,7 @@
         <span 
         v-if="movie?.adult"
         style="display:inline-block; background-color:#851717; padding: 3px 5px;
-        border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
+      border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
       19</span>
 
 <!-- GENRES -->
@@ -63,13 +63,14 @@
     
 <!-- MOVIE REVIEW LIST AND REVIEW FORM -->
     <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px;">
-      <span style="font-size: 30px; margin: 0 20px;">Reviews</span>
+      <span style="font-size: 30px;">Reviews</span>
+      <span style="margin: 0 20px 0 10px;">( {{movie?.review_count}} )</span>
       <span class="form-btn" @click="formClicked">Write Review</span>
       <hr>
 
 <!-- REVIEW FORM -->
-      <detail-review-form @close-form="isFormViewed=false"
-      v-if="isFormViewed" :movie="movie" style="margin-bottom: 20px;"/>
+      <detail-review-form v-if="isFormViewed" :movie="movie" @close-form="isFormViewed=false"
+      style="margin-bottom: 20px;"/>
 
 <!-- REVIEW LIST -->
       <detail-review-list :reviews="movie?.reviews"/>
@@ -113,6 +114,7 @@ export default {
   methods:{
     // form button 클릭시 form 열고 닫기 (innertext 변경)
     formClicked(){
+      console.log(this.movie)
       const btnText = document.querySelector('.form-btn')
 
       if (this.isFormViewed){
