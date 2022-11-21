@@ -1,5 +1,5 @@
 <template>
-  <div id="modal-content" >
+  <div id="modal-content" style="display:flex;">
     <div class="modal-content-half">
       <img src="@/assets/darkLogo.png" style="width: 300px; margin: 40px;">
     </div>
@@ -49,10 +49,6 @@ export default {
 </script>
 
 <style scoped>
-#modal-content{
-  display: flex;
-}
-
 a{
   text-decoration: none;
 }
@@ -89,8 +85,8 @@ a{
 }
 
 #forms{
-  max-width: 50%;
+  /* width: 50%; */
   padding: 20px;
-  padding-bottom: 35px;
+  /* padding-bottom: 35px; */
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-  <form @submit.prevent="signUp">
+  <form @submit.prevent="signUp" style="width: 356px;">
     <label for="username"><font-awesome-icon icon="fa-solid fa-user" />Username </label>
     <input type="text" id="username" v-model="username" class="userInput">  <br>
 
