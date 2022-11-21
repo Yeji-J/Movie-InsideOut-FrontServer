@@ -91,11 +91,12 @@ export default {
   data(){
     return {
       isFormViewed:false,
-      isLiked:false,
+      isLiked:false
     }
   },
   computed:{
     movie(){
+
       return this.$store.state.movie
     },
     imgSrc(){
@@ -104,6 +105,9 @@ export default {
     backdropImgSrc(){
       return `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`
     },
+    // isLiked(){
+    //   return 
+    // }
   },
   methods:{
     // form button 클릭시 form 열고 닫기 (innertext 변경)

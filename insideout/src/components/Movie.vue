@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <div id="head">
       <h1>Movie</h1>
       <nav>

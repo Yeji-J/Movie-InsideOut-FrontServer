@@ -1,6 +1,6 @@
 <template>
   <form id="reviewForm">
-    <h4 style="display:inline-block; margin-right: 20px;">{{movie.title}}</h4>
+    <span style="font-size: 25px; margin-right: 20px;">{{movie.title}}</span>
 
     <!-- RATINGS -->
     <span class="star">
@@ -8,11 +8,11 @@
       <span>★★★★★</span>
       <input type="range" @input="drawStar" value="0" step="1" min="0" max="10">
     </span>
-    
-    <textarea cols="30" rows="10" placeholder="Write your review !"></textarea>
-    
-    <input type="submit" value="write" class="review-btn"
-    style="padding: 2px 7px; margin: 10px">
+    <div>
+      <textarea cols="30" rows="10" placeholder="Write your review !"></textarea>
+      <input type="submit" value="write" class="review-btn"
+      style="padding: 2px 7px; margin: 10px;">
+    </div>
   </form>
 </template>
 
@@ -36,8 +36,7 @@ export default {
 <style>
 #reviewForm{
   margin: 0 auto;
-  width: 830px;
-  min-width: 500px;
+  width: 100%;
   border-radius: 10px;
   border: 0.5px solid #F8F9FA;
   padding: 20px 40px;
@@ -45,11 +44,11 @@ export default {
 
 textarea{
   color:#F8F9FA;
-  width:650px;
-  min-width: 300px; 
+  width: 80%;
+  min-width: 300px;
   max-height:60px; 
   font-size:17px; 
-  padding: 10px; 
+  padding: 10px;
   margin: 20px;
   margin-right: 30px;
   border:0;
@@ -66,7 +65,7 @@ textarea:focus{
 }
 
 textarea::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 textarea::-webkit-scrollbar-corner{
