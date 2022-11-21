@@ -1,6 +1,6 @@
 <template>
   <div id="community">
-    <section id="board" style="width: fit-content; padding: 40px;">
+    <section id="board" style=" padding: 40px;">
 
       <div>
         <h4>Hot Reviewers</h4>

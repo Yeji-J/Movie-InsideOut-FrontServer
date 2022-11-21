@@ -1,5 +1,5 @@
 <template>
-  <div id="history">
+  <div id="history" style="height:100%;">
     <h2><font-awesome-icon icon="fa-solid fa-film" 
       style="margin: 0 10px; color:#5d99c6;"/>
       Movie History</h2>
@@ -7,9 +7,13 @@
     <div class=card-container>
       <div class="cardbox"
       v-for="movie in movies" :key="movie.id">
-        <img :src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`">
-        <h6 style="text-align:center; width: 50%;">
-        {{movie.title}}</h6>
+        <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`">
+        <div style=" margin-left: 30px; display:flex; flex-direction: column;">
+          <h5>
+          {{movie.title}}</h5>
+          <span>★★★★★</span> 
+          <span>review content ~ ~ ~ </span>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +34,7 @@ export default {
 <style>
 
 .card-container{
-  max-height: 28em;
+  height: 90%;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -41,6 +45,7 @@ export default {
 
 .card-container::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
   }
   
 .card-container::-webkit-scrollbar-corner{
@@ -56,18 +61,26 @@ export default {
 }
 
 .cardbox{
-  border-radius: 10px;
-  border: 1px solid #f8f9facc;
+  padding: 20px;
+  width: 90%;
+  min-width: 500px;
+  display:flex;
+  background-color:#2c3036;
   color: #F8F9FA;
-  display: flex;
+  border-radius: 5px;
+  box-shadow: inset 0 0 1px #212429;
   margin-bottom: 10px;
-  align-items: center;;
+  /* border: 1px solid #f8f9facc;
+  
+  display: flex;
+  
+  ; */
 }
 
 .cardbox img{
-  border-radius: 10px 0 0 10px;
-  width: 50%;
-  
+  width: 100px;
+  box-shadow: 2px 2px 2px #1c1c1c;
+
 }
 
 

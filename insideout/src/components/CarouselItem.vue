@@ -12,15 +12,17 @@
       half-increments
       readonly
       size="18"
-      style="margin: 3px 0"
+      style="margin: 5px 0;"
     ></v-rating>
-      <hr>
+      <hr style="margin: 10px 0;">
       <p>Genre | {{ movie?.genres[0]["name"] }}</p>
       <p>Release Date | {{movie?.release_date}}</p>
       <p>Vote Count | {{movie?.vote_count}}</p>
       <button  @click="goDetail(movie?.movie_id)">MORE</button>
-      <hr>
-      
+      <hr style="margin: 5px 0;">
+      <div>
+        
+      </div>
     </div>
     
   </div>
