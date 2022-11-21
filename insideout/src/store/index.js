@@ -130,7 +130,6 @@ export default new Vuex.Store({
       })
         .then((res)=>{
           context.commit('GET_REVIEWS', res.data)
-          console.log(res)
         })
         .catch((err)=>{
           console.log(err)
@@ -167,7 +166,7 @@ export default new Vuex.Store({
         }
       })
         .then(()=>{
-          location.reload()
+          this.dispatch('getReviews', payload.movieId)
         })
         .catch((err)=>{
           console.log(err)
@@ -176,7 +175,7 @@ export default new Vuex.Store({
     // EDIT REVIEW (UPDATE & DELETE)
     editReview(context, payload){
       // payload 값의 value에 따라 method 지정
-
+      console.log(payload)
       axios({
         url: `${API_URL}/movies/reviews/${payload.id}/`,
         method: payload.type,
@@ -186,7 +185,7 @@ export default new Vuex.Store({
         }
       })
       .then (()=>{
-
+        this.dispatch('getReviews', payload.movieId)
       })
       .catch((err)=>{
         console.log(err)

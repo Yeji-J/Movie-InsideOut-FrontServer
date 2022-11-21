@@ -42,6 +42,7 @@ export default {
         }
       }
       this.$store.dispatch('createReview', payload)
+      console.log('hi')
     }
   }
 }

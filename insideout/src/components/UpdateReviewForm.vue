@@ -1,6 +1,6 @@
 <template>
   <form id="reviewForm" @submit.prevent="editReview(review)">
-    <span style="font-size: 25px; margin-right: 20px;">{{review?.user_id}}</span>
+    <span style="font-size: 25px; margin-right: 20px;">{{review?.movie.title}}</span>
     
     <span class="star">
       ★★★★★
@@ -35,6 +35,7 @@ export default {
     editReview(review){
       const payload = {
         type : 'PUT',
+        movieId: review.movie.movie_id,
         id: review.id, 
         data:{
           content: this.content,
@@ -43,7 +44,11 @@ export default {
       }
 
       this.$store.dispatch('editReview', payload)
-      this.$store.dispatch('getReviews', this.$route.params.id)
+      // this.$store.dispatch('getReviews', this.review.movie.movie_id)
+      // 두번 submit 했을 때 반영
+      // this.$store.dispatch('getReviews', this.$route.params.id)
+      // reload
+      // this.$router.go()
     }
   },
   mounted(){
