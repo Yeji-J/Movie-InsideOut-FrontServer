@@ -3,7 +3,7 @@
     <div>
       <div style="display:flex; justify-content:space-between">
             <div>
-              {{review?.user_id}} | 
+              {{review?.username}} | 
               <v-rating
               style="display:inline-block; margin-bottom: 5px;"
               class="rating"
@@ -21,7 +21,7 @@
           <div style="margin-right: 50px;">
             <font-awesome-icon icon="fa-solid fa-pen" class="updateReview" @click="updateReview(); "/>
             <font-awesome-icon icon="fa-solid fa-trash" style="margin-left: 20px;" class="deleteReview" 
-            @click="editReview({reviewId:review.id, value:'delete'})"/>
+            @click="editReview(review)"/>
           </div>
       </div>
       
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <update-review-form v-if="reviewId" :review="review"/>
+    <update-review-form v-if="reviewId" :review="review" @close-form="reviewId=false"/>
   </div>
 </template>
 
@@ -54,6 +54,18 @@ export default {
     updateReview(){
       this.reviewId = !this.reviewId;
     },
+    editReview(review){
+      const payload = {
+        type : 'DELETE',
+        movieId: review.movie.movie_id,
+        id: review.id, 
+        data:{
+          content: this.content,
+          vote:this.vote,
+        }
+      }
+      this.$store.dispatch('editReview', payload)
+    }
 
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <form id="reviewForm" @submit.prevent="editReview(review)">
+  <form id="reviewForm" @submit.prevent="editReview(review)" style="margin-top:10px;">
     <span style="font-size: 25px; margin-right: 20px;">{{review?.movie.title}}</span>
     
     <span class="star">
@@ -8,7 +8,7 @@
       <input type="range" @input="drawStar" v-model="vote" step="1" min="0" max="10">
     </span>
     <div>
-      <textarea cols="30" rows="10" placeholder="Write your review !" v-model="content"></textarea>
+      <textarea cols="30" rows="10" placeholder="Write your review !" v-model.trim="content"></textarea>
       <input type="submit" value="EDIT" class="review-btn" 
       style="padding: 2px 7px; margin: 10px;">
     </div>
@@ -33,6 +33,9 @@ export default {
       document.querySelector('.star span').style.width = `${event.target.value * 15}px`;
     },
     editReview(review){
+      if (!this.content){
+        alert('Please write the content')
+      }
       const payload = {
         type : 'PUT',
         movieId: review.movie.movie_id,
@@ -42,13 +45,8 @@ export default {
           vote:this.vote,
         }
       }
-
       this.$store.dispatch('editReview', payload)
-      // this.$store.dispatch('getReviews', this.review.movie.movie_id)
-      // 두번 submit 했을 때 반영
-      // this.$store.dispatch('getReviews', this.$route.params.id)
-      // reload
-      // this.$router.go()
+      this.$emit('close-form')
     }
   },
   mounted(){

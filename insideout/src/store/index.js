@@ -174,8 +174,6 @@ export default new Vuex.Store({
     },
     // EDIT REVIEW (UPDATE & DELETE)
     editReview(context, payload){
-      // payload 값의 value에 따라 method 지정
-      console.log(payload)
       axios({
         url: `${API_URL}/movies/reviews/${payload.id}/`,
         method: payload.type,

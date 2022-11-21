@@ -9,7 +9,7 @@
       <input type="range" @input="drawStar" v-model="vote" step="1" min="0" max="10">
     </span>
     <div>
-      <textarea cols="30" rows="10" placeholder="Write your review !" v-model="content"></textarea>
+      <textarea cols="30" rows="10" placeholder="Write your review !" v-model.trim="content"></textarea>
       <input type="submit" value="write" class="review-btn"
       style="padding: 2px 7px; margin: 10px;">
     </div>
@@ -34,6 +34,9 @@ export default {
       // console.log(document.querySelector('.star input').value)
     },
     createReview(){
+      if (!this.content){
+        alert('Please write the content')
+      }
       const payload={
         movieId:  this.$route.params.id,
         data:{
@@ -42,7 +45,7 @@ export default {
         }
       }
       this.$store.dispatch('createReview', payload)
-      console.log('hi')
+      this.$emit('close-form')
     }
   }
 }

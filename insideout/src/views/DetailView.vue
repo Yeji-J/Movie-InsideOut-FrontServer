@@ -68,8 +68,8 @@
       <hr>
 
 <!-- REVIEW FORM -->
-      <detail-review-form v-if="isFormViewed" :movie="movie"
-      style="margin-bottom: 20px;"/>
+      <detail-review-form @close-form="isFormViewed=false"
+      v-if="isFormViewed" :movie="movie" style="margin-bottom: 20px;"/>
 
 <!-- REVIEW LIST -->
       <detail-review-list :reviews="movie?.reviews"/>
