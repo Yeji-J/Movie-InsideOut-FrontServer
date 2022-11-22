@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import BlogView from '@/views/BlogView.vue'
 import CommunityView from '@/views/CommunityView.vue'
+import RecomView from '@/views/RecomView.vue'
 
 Vue.use(VueRouter)
 
@@ -24,11 +25,16 @@ const routes = [
     component: CommunityView,
   },
   {
-    // username dynamic params => /:str
+    // username dynamic params => /:username
     path: '/blog/:username',
     name: 'blog',
     component: BlogView,
   },
+  {
+    path: '/recommend',
+    name:'recommend',
+    component: RecomView
+  }
 
 
   // {

@@ -3,7 +3,7 @@
     
     <h2>
       <font-awesome-icon icon="fa-solid fa-clapperboard"
-      style="color:#9ccc65; margin: 0 10px;" />
+      style="color:rgb(197, 32, 41); margin: 0 10px;" />
       Watchlist</h2>
 
     <hr>
@@ -87,7 +87,12 @@ export default {
   display:flex;
   justify-content: space-evenly;
   box-shadow: 2px 2px 2px #1b1d1f;
+  transition: transform 0.2s linear;
+}
 
+.cardbox:hover{
+  cursor:pointer;
+  transform: scale(1.05);
 }
 
 .cardbox img{

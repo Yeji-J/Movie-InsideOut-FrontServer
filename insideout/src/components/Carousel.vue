@@ -1,13 +1,15 @@
 <template>
-  <div id="carousel">
-    <carousel-3d
-    :autoplay="true" :autoplay-timeout="2300">
-      <slide v-for="(movie, i) in movies" 
-      :index="i"
-      :key="movie?.id">
-        <carousel-item :movie="movie"/>
-      </slide>
-    </carousel-3d>
+  <div>
+    <div id="carousel">
+      <carousel-3d
+      :autoplay="true" :autoplay-timeout="2300">
+        <slide v-for="(movie, i) in movies" 
+        :index="i"
+        :key="movie?.id">
+          <carousel-item :movie="movie"/>
+        </slide>
+      </carousel-3d>
+    </div>
   </div>
 </template>
 
