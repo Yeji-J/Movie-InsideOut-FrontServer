@@ -10,7 +10,7 @@
     </span>
     <div>
       <textarea cols="30" rows="10" placeholder="Write your review !" v-model.trim="content"></textarea>
-      <input type="submit" value="write" class="review-btn"
+      <input type="submit" value="write" class="review-btn" @click="$emit('close-btn')"
       style="padding: 2px 7px; margin: 10px;">
     </div>
   </form>
@@ -31,7 +31,6 @@ export default {
   methods:{
     drawStar(event) {
       document.querySelector('.star span').style.width = `${event.target.value * 15}px`;
-      // console.log(document.querySelector('.star input').value)
     },
     createReview(){
       if (!this.content){

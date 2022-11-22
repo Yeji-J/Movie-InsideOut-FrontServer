@@ -7,15 +7,14 @@
         <span >Hello, <span style="font-size: 26px ">{{this.userInfo?.username}}</span></span>
 
         <h6 class="follow-btn" style="margin: 30px 0; border-radius: 10px; border: 2px solid #c3ddecd0;
-        width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
+      width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
       >Following</h6>
 
         <div style="background-color:#c3ddecd0; color:#23262b; padding: 10px 0; width: 100%;">
-          <div><font-awesome-icon icon="fa-solid fa-comment-dots" class="icon" />Reviews | {{this.userInfo.reviews.length}}</div>
-          <div><font-awesome-icon icon="fa-solid fa-users" class="icon" />Follower |</div>
-          <div><font-awesome-icon icon="fa-solid fa-user" class="icon" />Following |</div>
+          <div><font-awesome-icon icon="fa-solid fa-comment-dots" class="icon" />Reviews | {{this.userInfo?.reviews.length}}</div>
+          <div><font-awesome-icon icon="fa-solid fa-users" class="icon" />Follower | {{this.userInfo?.follower_count}}</div>
+          <div><font-awesome-icon icon="fa-solid fa-user" class="icon" />Following | {{this.userInfo?.following_count}}</div>
         </div>
-        
         
       </div>
 
@@ -98,6 +97,7 @@ export default {
   },
   beforeCreate(){
     this.$store.dispatch('getUser', this.$route.params.username)
+    console.log(this.$store.state.userInfo)
   }
 }
 </script>

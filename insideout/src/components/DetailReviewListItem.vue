@@ -3,7 +3,8 @@
     <div>
       <div style="display:flex; justify-content:space-between">
             <div>
-              {{review?.username}} | 
+              <span class="username" @click="$router.push({name:'blog', params:{username:review?.username}})" >
+                {{review?.username}}</span> | 
               <v-rating
               style="display:inline-block; margin-bottom: 5px;"
               class="rating"
@@ -18,7 +19,8 @@
             <span style="margin-left: 10px; font-size: 12px;">[ {{review?.vote/2}} / 5 ]</span>
             <span style="margin-left: 20px; font-size: 10px;">{{review?.created_at.split('T')[0]}}</span>
           </div>
-          <div style="margin-right: 50px;">
+          <div v-if="review?.username === username"
+          style="margin-right: 50px;">
             <font-awesome-icon icon="fa-solid fa-pen" class="updateReview" @click="updateReview(); "/>
             <font-awesome-icon icon="fa-solid fa-trash" style="margin-left: 20px;" class="deleteReview" 
             @click="editReview(review)"/>
@@ -44,7 +46,9 @@ export default {
   },
   data(){
     return {
+      username: localStorage.getItem('username'),
       reviewId:false,
+
     }
   },
   props:{
@@ -71,6 +75,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.username:hover{
+  cursor:pointer;
+}
 
 </style>

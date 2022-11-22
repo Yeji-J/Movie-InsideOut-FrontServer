@@ -109,6 +109,10 @@ label svg{
   transform: translateY(4px);
 }
 
+.userInput{
+  color:#F8F9FA;
+}
+
 .userInput:focus{
   outline: none;
   caret-color: #F8F9FA;

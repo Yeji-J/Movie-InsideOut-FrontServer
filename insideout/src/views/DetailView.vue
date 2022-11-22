@@ -37,8 +37,8 @@
 
 <!-- ADULT -->
         <span 
-        v-if="movie?.adult"
-        style="display:inline-block; background-color:#851717; padding: 3px 5px;
+      v-if="movie?.adult"
+      style="display:inline-block; background-color:#851717; padding: 3px 5px;
       border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
       19</span>
 
@@ -62,10 +62,10 @@
     </section>
     
 <!-- MOVIE REVIEW LIST AND REVIEW FORM -->
-    <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px;">
+    <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px; ">
       <span style="font-size: 30px;">Reviews</span>
       <span style="margin: 0 20px 0 10px;">( {{movie?.review_count}} )</span>
-      <span class="form-btn" @click="formClicked">Write Review</span>
+      <span v-if="reviewBtn" class="form-btn" @click="formClicked" >Write Review</span>
       <hr>
 
 <!-- REVIEW FORM -->
@@ -109,6 +109,17 @@ export default {
     },
     isLiked(){
       return this.$store.state.movieLike
+    },
+    reviewBtn(){
+      const username = localStorage.getItem('username');      
+      let res = true
+      this.movie.reviews.forEach((review)=>{
+        if (review.username == username){
+          res = false
+          return res
+        } 
+      })
+      return res
     }
   },
   methods:{
@@ -131,6 +142,7 @@ export default {
   },
   beforeCreate(){
     this.$store.dispatch('getDetail', this.$route.params.id)
+    console.log(this.movie)
   },
   // 새로고침했을 때 데이터를 불러올 수 있는 방법은 ~  ?
   // mounted(){
