@@ -41,7 +41,7 @@ export default {
 #homeMovie img {
   width: 100%;
   border-radius: 10px;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.205);
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.247);
   transition: transform 0.5s;
 }
 

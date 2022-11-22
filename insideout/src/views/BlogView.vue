@@ -2,36 +2,50 @@
   <div id="blog">
     <!-- SIDEBAR -->
     <div id="sidebar">
-      <span>Hello, <span style="font-size: 24px ">Username</span></span>
-      <div class="profile" style="background-color:#c3ddecd0; width: 100%;">
-        <div><span>123</span><span>123</span><span>123</span></div>
-        <div style="font-size:10px"><span>Reviews</span><span>Followers</span><span>Following</span></div>
+
+      <div class="profile" style="display:flex; flex-direction: column; align-items:center">
+        <span >Hello, <span style="font-size: 26px ">{{this.userInfo?.username}}</span></span>
+
+        <h6 class="follow-btn" style="margin: 30px 0; border-radius: 10px; border: 2px solid #c3ddecd0;
+        width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
+      >Following</h6>
+
+        <div style="background-color:#c3ddecd0; color:#23262b; padding: 10px 0; width: 100%;">
+          <div><font-awesome-icon icon="fa-solid fa-comment-dots" class="icon" />Reviews | {{this.userInfo.reviews.length}}</div>
+          <div><font-awesome-icon icon="fa-solid fa-users" class="icon" />Follower |</div>
+          <div><font-awesome-icon icon="fa-solid fa-user" class="icon" />Following |</div>
+        </div>
+        
+        
       </div>
+
+
       <div class="bar-item" @click="isClicked('favorites')" :class="{'is-selected': this.favorites}">
-        <font-awesome-icon icon="fa-solid fa-heart" style="margin-right: 10px;"/> Favorites</div>
+        <font-awesome-icon icon="fa-solid fa-heart" class="icon"/> Favorites</div>
         
       <div class="bar-item" @click="isClicked('watchlist')" :class="{'is-selected': this.watchlist}">
-        <font-awesome-icon icon="fa-solid fa-clapperboard" style="margin-right: 10px;"/>Watchlist</div>
+        <font-awesome-icon icon="fa-solid fa-clapperboard" class="icon"/>Watchlist</div>
 
-      <div class="bar-item" @click="isClicked('reviews')" :class="{'is-selected': this.reviews}">
-        <font-awesome-icon icon="fa-solid fa-comment-dots" style="margin-right: 10px;"/>My Review</div>
+      <div class="bar-item" @click="isClicked('posts')" :class="{'is-selected': this.posts}">
+        <font-awesome-icon icon="fa-solid fa-pen-to-square" class="icon"/>Post</div>
         
-      <div class="bar-item" @click="isClicked('history')" :class="{'is-selected': this.history}">
-        <font-awesome-icon icon="fa-solid fa-film" style="margin-right: 10px;"/>Movie History</div>
+      <div
+      class="bar-item" @click="isClicked('history')" :class="{'is-selected': this.history}">
+        <font-awesome-icon icon="fa-solid fa-film" class="icon"/>Movie History</div>
     </div>
 
     <!-- CONTENT -->
     <div id="content" style="padding: 50px 90px;">
+      <my-favorites :favorites="this.userInfo?.favorites" v-if="this.favorites"/>
       <my-watchlist v-if="this.watchlist"/>
-      <my-review v-if="this.reviews"/>
-      <my-favorites v-if="this.favorites"/>
-      <my-history v-if="this.history"/>
+      <my-post v-if="this.posts"/>
+      <my-history v-if="this.history" :reviews="this.userInfo.reviews"/>
     </div>
   </div>
 </template>
 
 <script>
-import MyReview from '../components/MyReview.vue'
+import MyPost from '@/components/MyPost.vue'
 import MyWatchlist from '../components/MyWatchlist.vue'
 import MyFavorites from '../components/MyFavorites.vue'
 import MyHistory from '../components/MyHistory.vue'
@@ -40,7 +54,7 @@ export default {
   name:'BlogView',
   components:{
     MyWatchlist,
-    MyReview,
+    MyPost,
     MyFavorites,
     MyHistory,
   },
@@ -48,38 +62,43 @@ export default {
     return{
       favorites:true,
       watchlist:false,
-      reviews:false,
+      posts:false,
       history: false,
+    }
+  },
+  computed:{
+    userInfo(){
+      return this.$store.state.userInfo
     }
   },
   methods:{
     isClicked(params){
       if (params==='watchlist'){
         this.watchlist=true
-        this.reviews=false
+        this.posts=false
         this.favorites=false
         this.history=false
-      } else if (params==='reviews'){
+      } else if (params==='posts'){
         this.watchlist=false
-        this.reviews=true
+        this.posts=true
         this.favorites=false
         this.history=false
       } else if (params==='favorites'){
         this.watchlist=false
-        this.reviews=false
+        this.posts=false
         this.favorites=true
         this.history=false
       } else {
         this.watchlist=false
-        this.reviews=false
+        this.posts=false
         this.favorites=false
         this.history=true
       }
     }
   },
-  // beforeCreate(){
-  //   this.$store.dispatch('getUserInfo')
-  // }
+  beforeCreate(){
+    this.$store.dispatch('getUser', this.$route.params.username)
+  }
 }
 </script>
 
@@ -96,10 +115,11 @@ export default {
   border-radius: 10px;
   height: 80vh;
   margin: 0 20px;
+  min-width: 200px;
 }
 
 #sidebar{
-  font-size: 17px;
+  font-size: 20px;
   padding-bottom: 30px;
   min-width: 200px;
   width: 15%;
@@ -109,34 +129,36 @@ export default {
   justify-content: space-evenly;
 }
 
-.profile {
-  color: #23262b;
-  height: 80px;
-  padding-top: 20px;
-}
-
 #content{
   min-width: 500px;
   width: 55%;
 }
 
-.bar-item{
-  transition: transform 0.2s linear;
+.bar-item,
+.follow-btn{
+  transition: transform 0.2s;
 }
 
-.bar-item:hover{
+.bar-item:hover,
+.follow-btn:hover{
   cursor:pointer;
   transform: scale(1.05);
 }
 
-.bar-item:active{
-  transform: translateY(10px);
+.bar-item:active,
+.follow-btn:active{
+  transform: translateY(5px);
 }
 
 .is-selected{
-  font-size: 22px;
+  font-size: 23px;
   font-weight: bold;
-  color:#C3DDEC;
 }
+
+.icon{
+  margin-right: 10px;
+  width: 15px;
+}
+
 
 </style>

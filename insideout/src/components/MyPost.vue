@@ -1,9 +1,10 @@
 <template>
   <div>
     <h2>
-      <font-awesome-icon icon="fa-solid fa-comment-dots"
+      <font-awesome-icon icon="fa-solid fa-pen-to-square" 
       style="color:#b39ddb; margin: 0 10px;"/>
-      My Review</h2>
+      My Post
+      </h2>
     <hr>
   </div>
   
@@ -11,7 +12,7 @@
 
 <script>
 export default {
-  name:'MyReview',
+  name:'MyPost',
 }
 </script>
 

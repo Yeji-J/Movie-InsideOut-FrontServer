@@ -11,30 +11,30 @@
 </template>
 
 <script>
-export default {
-  name:'LoginView',
-  data(){
-    return {
-      username:null,
-      password:null,
-    }
-  },
-  methods:{
-    login(){
-      const username = this.username;
-      const password = this.password;
-
-      const payload = {
-        username,
-        password,
+  export default {
+    name:'LoginView',
+    data(){
+      return {
+        username:null,
+        password:null,
       }
+    },
+    methods:{
+      login(){
+        const username = this.username;
+        const password = this.password;
+
+        const payload = {
+          username,
+          password,
+        }
 
       this.$store.dispatch('login', payload)
 
       // token을 localStorage에 저장하는 시간보다
       // token 값을 불러오는 게 더 빠르기 때문에
       // 로그인에 성공해도 alert 창이 뜸 
-      // => timeout 함수로 0.5초 후 해당 로직 실행으로 바꿔주기
+      // => timeout 함수로 0.5초 후 해당 로직 실행으로 바꿔주기 trash code ^^>...
       setTimeout(()=>{
         const userString = localStorage.getItem('user')
 
@@ -43,11 +43,11 @@ export default {
         } else {
           alert('login failed !')
         }
-      }, 500);
-
-    },
+        }, 500);
+      }
+    }
   }
-}
+  
 </script>
 
 <style scoped>

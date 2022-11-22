@@ -33,7 +33,6 @@ export default {
       document.querySelector('.star span').style.width = `${event.target.value * 15}px`;
     },
     editReview(review){
-      console.log(review.vote)
       if (!this.content){
         alert('Please write the content')
       }
@@ -51,7 +50,7 @@ export default {
     }
   },
   mounted(){
-  document.querySelector('.star span').style.width = `${this.review.vote * 15}px`;
+    document.querySelector('.star span').style.width = `${this.review.vote * 15}px`;
   }
 }
 </script>

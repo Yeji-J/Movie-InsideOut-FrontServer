@@ -15,7 +15,9 @@ export default new Vuex.Store({
   //   createPersistedState(),
   // ],
   state: {
+    username:null,
     token: null,
+    userInfo:null,
     movies: null,
     movie:null,
     moviesPopular: null,
@@ -25,12 +27,17 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
-    SAVE_TOKEN(state, token) {
-      state.token = token
+    SAVE_TOKEN(state, payload) {
+      state.username = payload.username
+      state.token = payload.token
+      localStorage.setItem('user', payload.token)
+      localStorage.setItem('username', payload.username)
     },
 
     LOGOUT(state) {
       localStorage.removeItem('user')
+      localStorage.removeItem('username')
+      state.username = null
       state.token = null
     },
 
@@ -54,6 +61,10 @@ export default new Vuex.Store({
     GET_REVIEWS(state, payload) {
       state.reviews = payload
     },
+    SAVE_USERINFO(state, payload){
+      state.userInfo = payload
+    }
+
   },
 
   actions: {
@@ -71,8 +82,11 @@ export default new Vuex.Store({
         }
       })
       .then((res) => {
-        localStorage.setItem('user', res.data.token)
-        context.commit("SAVE_TOKEN", res.data.token)
+        const payload = {
+          token: res.data.token,
+          username,
+        }
+        context.commit("SAVE_TOKEN", payload)
       })
       .catch((err) => {
         console.log(err)
@@ -106,7 +120,6 @@ export default new Vuex.Store({
     },
     // GET MOVIE DETAIL
     getDetail(context, movieId){
-
       axios({
         method: "get",
         url: `${API_URL}/movies/${movieId}/`,
@@ -188,6 +201,22 @@ export default new Vuex.Store({
       .catch((err)=>{
         console.log(err)
       })
+    },
+    // GET USER
+    getUser(context, username){
+      axios({
+        method:'get',
+        url: `${API_URL}/profile/${username}/`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then((res)=>{
+          context.commit('SAVE_USERINFO', res.data)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
     }
   },
   modules: {},

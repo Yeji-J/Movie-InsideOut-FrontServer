@@ -13,7 +13,7 @@
       </div>
 
       <div style="margin: 60px 0;">
-        <h4>Recent Reviews</h4>
+        <h4>Recent Posts</h4>
         <hr>
         <div v-for="reviewer in reviewers" :key="reviewer.id" class="sidebox">
           <div style="height: 22px; width: 180px; overflow:hidden;">{{reviewer?.overview}}</div>...
