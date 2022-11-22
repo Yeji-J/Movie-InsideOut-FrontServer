@@ -97,7 +97,6 @@ export default {
   },
   beforeCreate(){
     this.$store.dispatch('getUser', this.$route.params.username)
-    console.log(this.$store.state.userInfo)
   }
 }
 </script>

@@ -32,7 +32,6 @@
 <script>
 export default {
   name: "MyHistory",
-  // 유저 데이터로 가져오기 !!!
   props:{
     reviews:Array
   },

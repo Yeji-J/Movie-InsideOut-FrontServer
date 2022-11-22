@@ -1,42 +1,60 @@
 <template>
-  <div>
+  <div style="height:100%;">
     
-      <h2>
-        <font-awesome-icon icon="fa-solid fa-clapperboard"
-        style="color:#9ccc65; margin: 0 10px;" />
-        Watchlist</h2>
-      <hr>
+    <h2>
+      <font-awesome-icon icon="fa-solid fa-clapperboard"
+      style="color:#9ccc65; margin: 0 10px;" />
+      Watchlist</h2>
 
-    <section style="display:flex; justify-content: center; width: 80%;">
-      <div>
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
+    <hr>
+    <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 50px; color:#c3ddecd0"/>
         <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
       </div>
-
-      <div class="search-btn">Search</div>
-    </section>
     
+    <div style="padding: 10px;" class="card-container">
+      <div class="cardbox" v-for="movie in movies" :key="movie.id">
+        <font-awesome-icon icon="fa-solid fa-thumbtack" class="pin" />
+        <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`">
+        <div class="card-content">
+          <span style="font-size: 18px; font-weight:bold;">{{movie.title}}</span>
+          {{movie.genres[0]["name"] }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+// import MyWatchlistItem from '@/components/MyWatchlistItem.vue';
+
 export default {
   name: 'MyWatchlist',
+  components:{
+    // MyWatchlistItem,
+  },
   data(){
     return {
       search: null,
+      // 유저 데이터로 가져오기 !!
     }
-  }
+  },
+  computed:{
+    movies(){
+      return this.$store.state.userInfo.favorites.slice(4)
+    }
+  },
 }
 </script>
 
 <style scoped>
 
-.search-bar,
-.search-btn {
-  height: 30px;
-  border: 2px solid #c3ddecd0;
-  border-radius: 10px;
+.search-bar {
+  padding-left: 10px;
+  width: 100%;
+  height: 35px;
+  background-color:#2c3036;
+  border-radius: 5px;
 }
 
 .search-bar:focus{
@@ -49,13 +67,60 @@ export default {
   color:#F8F9FA;
 }
 
-.search-btn{
-  margin-left: 20px;
-  padding: 0 2px;
-  border: none;
+.card-container{
+  height: 80%;
+  overflow: scroll;
+  display: flex;
+  flex-wrap:wrap;
+  margin: 25px;
+  justify-content: left;
+}
+.cardbox{
+  margin: 10px;
+  width: 230px;
+  height: 150px;
   background-color:#c3ddecd0;
-  color:#23262b;
-  box-shadow: 0 0 2px 2px #272f35;
+  transform: rotate(2deg);
+  padding: 10px;
+  position: relative;
+  color:#2c3036;
+  display:flex;
+  justify-content: space-evenly;
+  box-shadow: 2px 2px 2px #1b1d1f;
+
+}
+
+.cardbox img{
+  border-radius:10px;
+  width: 60%;
+  margin-right: 10px;
+  box-shadow: 0 2px 2px #1b1d1f;
+
+}
+
+.pin{
+  position: absolute;
+  color:rgb(197, 32, 41); 
+  width: 100%;
+  top: -7px;
+  left: 0px;
+}
+
+.card-container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+  
+.card-container::-webkit-scrollbar-corner{
+  display:none;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+  background-color:#c3ddecd0;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  box-shadow: inset 0 0 2px #c3ddecc5;
 }
 
 </style>

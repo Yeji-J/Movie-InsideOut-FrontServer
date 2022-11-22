@@ -70,11 +70,9 @@ export default {
   display:flex;
   flex-direction: column;
   margin: 5px;
-  color: #23262b;
   box-shadow: 2px 2px 2px #1b1d1f;
-  background-color: #c3ddecd0;
+  background-color: #2c3036;
   border-radius: 10px;
-
   transition: transform 0.2s linear;
 }
 
