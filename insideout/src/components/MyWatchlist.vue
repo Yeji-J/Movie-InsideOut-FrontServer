@@ -13,7 +13,7 @@
       </div>
     
     <div style="padding: 10px;" class="card-container">
-      <div class="cardbox" v-for="movie in movies" :key="movie.id">
+      <div class="cardbox" @click="goDetail(movie?.movie_id)" v-for="movie in movies" :key="movie.id">
         <font-awesome-icon icon="fa-solid fa-thumbtack" class="pin" />
         <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`">
         <div class="card-content">
@@ -44,6 +44,11 @@ export default {
       return this.$store.state.userInfo.favorites.slice(4)
     }
   },
+  methods:{
+    goDetail(movieId){
+      this.$router.push({name:'DetailView', params:{id:movieId}})
+    }
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 100px; ">
-    <h2 style="text-align:center">Pick Your Feelings of Today !</h2>
+    <h2 style="text-align:center">Pick a Feeling !</h2>
     <nav style="width: 100%; display:flex; justify-content: space-evenly; margin: 50px 0 100px 0; text-align: center;">
       <div @click="recommend('Joy')"><img src="@/assets/joy.png" style="width:75px;"><h4>Joy</h4></div>
       <div @click="recommend('Sadness')"><img src="@/assets/sad.png" style="width:110px;"><h4>Sadness</h4></div>
@@ -9,9 +9,8 @@
       <div @click="recommend('Disgust')"><img src="@/assets/disgust.png" style="width:120px;"><h4>Disgust</h4></div>
     </nav>
 
-
-    <recom-view-list :feeling="this.feeling"/>
-
+    <recom-view-list v-if="feeling" :feeling="feeling"/>
+    
   </div>
 </template>
 

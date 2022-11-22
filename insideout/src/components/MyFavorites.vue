@@ -8,13 +8,13 @@
 
     <div class=card-container>
 
-      <div class="cardbox"
+      <div class="cardbox" @click="goDetail(favorite?.movie_id)"
       v-for="favorite in favorites" :key="favorite.id">
 
-        <img :src="`https://image.tmdb.org/t/p/original${favorite.poster_path}`">
+        <img :src="`https://image.tmdb.org/t/p/original${favorite?.poster_path}`">
 
           <div style="font-weight:bold; padding: 5px 0; font-size: 12px; text-align: center;">
-          {{favorite.title}}</div>
+          {{favorite?.title}}</div>
 
           <!-- 장르 가져오기 -->
           <!-- {{review.created_at.split('T')[0]}} -->
@@ -32,6 +32,11 @@ export default {
   props:{
     favorites:Array,
   },
+  methods:{
+    goDetail(movieId){
+      this.$router.push({name:'DetailView', params:{id:movieId}})
+    }
+  }
 
 }
 </script>
