@@ -48,7 +48,6 @@ export default {
     return {
       username: localStorage.getItem('username'),
       reviewId:false,
-
     }
   },
   props:{
@@ -59,7 +58,9 @@ export default {
       this.reviewId = !this.reviewId;
     },
     editReview(review){
-      const payload = {
+
+      if (confirm('You really want to delete this review?')){
+        const payload = {
         type : 'DELETE',
         movieId: review.movie.movie_id,
         id: review.id, 
@@ -69,6 +70,7 @@ export default {
         }
       }
       this.$store.dispatch('editReview', payload)
+      } 
     }
 
   },

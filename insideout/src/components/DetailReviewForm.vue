@@ -10,7 +10,7 @@
     </span>
     <div>
       <textarea cols="30" rows="10" placeholder="Write your review !" v-model.trim="content"></textarea>
-      <input type="submit" value="write" class="review-btn" @click="$emit('close-btn')"
+      <input type="submit" value="write" class="review-btn"
       style="padding: 2px 7px; margin: 10px;">
     </div>
   </form>
@@ -35,8 +35,8 @@ export default {
     createReview(){
       if (!this.content){
         alert('Please write the content')
-      }
-      const payload={
+      } else {
+        const payload={
         movieId:  this.$route.params.id,
         data:{
           content:this.content,
@@ -45,6 +45,9 @@ export default {
       }
       this.$store.dispatch('createReview', payload)
       this.$emit('close-form')
+      this.$emit('close-btn')
+      }
+      
     }
   }
 }

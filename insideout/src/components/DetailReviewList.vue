@@ -52,4 +52,5 @@ export default {
 .updateReview:hover{
   color:#C3DDEC;
 }
+
 </style>

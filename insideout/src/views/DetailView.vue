@@ -37,9 +37,9 @@
 
 <!-- ADULT -->
         <span 
-      v-if="movie?.adult"
-      style="display:inline-block; background-color:#851717; padding: 3px 5px;
-      border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
+          v-if="movie?.adult"
+          style="display:inline-block; background-color:#851717; padding: 3px 5px;
+          border-radius: 20px; margin: 5px 15px; box-shadow: 0 0 2px 2px #191b1f;">
       19</span>
 
 <!-- GENRES -->
@@ -61,19 +61,19 @@
       </div>
     </section>
     
-<!-- MOVIE REVIEW LIST AND REVIEW FORM -->
+<!-- REVIEWS -->
     <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px; ">
       <span style="font-size: 30px;">Reviews</span>
-      <span style="margin: 0 20px 0 10px;">( {{movie?.review_count}} )</span>
+      <span style="margin: 0 20px 0 10px;">( {{reviews.length}} )</span>
       <span v-if="reviewBtn" class="form-btn" @click="formClicked" >Write Review</span>
       <hr>
 
 <!-- REVIEW FORM -->
-      <detail-review-form v-if="isFormViewed" :movie="movie" @close-form="isFormViewed=false"
+      <detail-review-form v-if="isFormViewed" :movie="movie" @close-form="isFormViewed=false" @close-btn="reviewBtn=false"
       style="margin-bottom: 20px;"/>
 
 <!-- REVIEW LIST -->
-      <detail-review-list :reviews="movie?.reviews"/>
+      <detail-review-list :reviews="reviews"/>
     </section>
   </div>
 
@@ -110,14 +110,18 @@ export default {
     isLiked(){
       return this.$store.state.movieLike
     },
+    reviews(){
+      return this.$store.state.reviews
+    },
     reviewBtn(){
       const username = localStorage.getItem('username');      
       let res = true
-      this.movie.reviews.forEach((review)=>{
-        if (review.username == username){
-          res = false
-          return res
-        } 
+
+      this.reviews.forEach((review)=>{
+      if (review.username === username){
+        res = false
+        return
+        }
       })
       return res
     }
@@ -140,14 +144,10 @@ export default {
       this.$store.dispatch('getLike', this.$route.params.id)
     }
   },
-  beforeCreate(){
+  created(){
     this.$store.dispatch('getDetail', this.$route.params.id)
-    console.log(this.movie)
+    this.$store.dispatch('getReviews', this.$route.params.id)
   },
-  // 새로고침했을 때 데이터를 불러올 수 있는 방법은 ~  ?
-  // mounted(){
-  //   this.$store.dispatch('getDetail', this.$route.params.id)
-  // }
 }
 </script>
 

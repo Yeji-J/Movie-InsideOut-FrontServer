@@ -10,8 +10,7 @@
         <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
       </div>
 
-      <input type="text" class="post-title">
-      <textarea class="post-content" cols="30" rows="10"></textarea>
+      <ckeditor v-model="content" :config="editorConfig"></ckeditor>
     </section>
   </div>
 </template>
@@ -19,6 +18,15 @@
 <script>
 export default {
   name:'PostCreateView',
+  data(){
+    return {
+      title:null,
+      content:null,
+      editorConfig: {
+          // The configuration of the editor.
+        },
+    }
+  }
 }
 </script>
 
@@ -43,7 +51,7 @@ export default {
 
 .post-title,
 .post-content {
-  width: 500px;
+  min-width: 700px;
   border: 1px solid #C3DDEC;
 }
 </style>
