@@ -9,8 +9,16 @@
     <hr>
     <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
       <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
-      <input type="text" v-model="search" placeholder="Search Movie" class="search-bar" style="min-width: 90%;">
+      <input type="text" v-model="searchInput" placeholder="Search Movie" class="search-bar" style="min-width: 90%;" @keyup.enter="searchMovie(searchInput)">
     </div>
+
+    <div v-if="this.searchMovies">
+      <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id" @click="addToWatchlist(searchMovie)">
+        <img :src="`https://image.tmdb.org/t/p/original${searchMovie?.poster_path}`" style="width: 20px;">
+        <span>{{searchMovie?.title}}</span>
+      </div>
+    </div>
+
     
     <div style="padding: 10px;" class="card-container">
 
@@ -36,48 +44,69 @@
 </template>
 
 <script>
-// import MyWatchlistItem from '@/components/MyWatchlistItem.vue';
-import axios from 'axios';
+import axios from 'axios'
+
+const API_URL = "http://127.0.0.1:8000"
+const token = localStorage.getItem('user')
 
 export default {
   name: 'MyWatchlist',
-  components:{
-    // MyWatchlistItem,
-  },
   data(){
     return {
-      search: null,
-      // 유저 데이터로 가져오기 !!
+      searchInput: null,
     }
   },
   computed:{
     movies(){
       return this.$store.state.userInfo.favorites.slice(4)
+    },
+    searchMovies(){
+      return this.$store.state.searchMovies
     }
   },
   methods:{
     goDetail(movieId){
       this.$router.push({name:'DetailView', params:{id:movieId}})
     },
-    removeItem(payload){
-      console.log(payload.movieId)
-      const API_URL = "http://127.0.0.1:8000"
-      const token = localStorage.getItem('user')
-
+    searchMovie(searchInput){
+      this.$store.dispatch('searchMovie',searchInput)
+    },
+    addToWatchlist(movie){
+      console.log(movie)
       axios({
-        method:payload.type,
-        url: `${API_URL}/accounts/watched/${payload.movieId}`,
+        method:'post',
+        url: `${API_URL}/movies/watchlist/`,
+        data:{movie},
         headers:{
           Authorization: `JWT ${token}`
         }
       })
-      .then (()=>{
-        this.$store.dispatch('getUser', this.$route.params.username)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then(()=>{
+          console.log('success')
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
     }
+    // removeItem(payload){
+    //   console.log(payload.movieId)
+    //   
+    //   const token = localStorage.getItem('user')
+
+    //   axios({
+    //     method:payload.type,
+    //     url: `${API_URL}/accounts/watched/${payload.movieId}`,
+    //     headers:{
+    //       Authorization: `JWT ${token}`
+    //     }
+    //   })
+    //   .then (()=>{
+    //     this.$store.dispatch('getUser', this.$route.params.username)
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+    // }
   },
 }
 </script>

@@ -21,6 +21,7 @@ export default new Vuex.Store({
     moviesRecent: null,
     movieLike:null,
     reviews:null,
+    searchMovies:null,
   },
   getters: {},
   mutations: {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     SAVE_USERINFO(state, payload){
       state.userInfo = payload
+    },
+    SAVE_SEARCHMOVIE(state, payload){
+      state.searchMovies = payload
     }
 
   },
@@ -214,6 +218,24 @@ export default new Vuex.Store({
         .catch((err)=>{
           console.log(err)
         })
+    },
+    searchMovie(context, movieTitle){
+      const API_KEY = '3cd8e0319cee80069c4b85f6cf42fded'
+      const TMDB_URL = 'https://api.themoviedb.org/3/search/movie'
+      axios({
+        method:'get',
+        url: TMDB_URL,
+        params:{
+          api_key: API_KEY,
+          query: movieTitle,
+        }
+      })
+        .then((res)=>{
+          context.commit('SAVE_SEARCHMOVIE', res.data.results.slice(15))
+        })
+        .catch((err)=>{
+          console.log(err)
+        });
     }
   },
   modules: {},
