@@ -8,8 +8,8 @@
 
     <hr>
     <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
-      <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 50px; color:#c3ddecd0"/>
-      <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
+      <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
+      <input type="text" v-model="search" placeholder="Search Movie" class="search-bar" style="min-width: 90%;">
     </div>
     
     <div style="padding: 10px;" class="card-container">

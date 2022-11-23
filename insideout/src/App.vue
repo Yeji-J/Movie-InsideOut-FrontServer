@@ -40,14 +40,12 @@ export default {
   data(){
     return {
       isModalViewed: false,
-    }
+      username: localStorage.getItem('username'),
+    } 
   },
   computed:{
     userToken(){
       return localStorage.getItem('user')
-    },
-    username(){
-      return localStorage.getItem('username')
     }
   },
   components: {

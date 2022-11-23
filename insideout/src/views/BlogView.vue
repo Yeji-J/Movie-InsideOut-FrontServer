@@ -4,9 +4,11 @@
     <div id="sidebar">
 
       <div class="profile" style="display:flex; flex-direction: column; align-items:center">
-        <span >Hello, <span style="font-size: 26px ">{{this.userInfo?.username}}</span></span>
+        <span style="margin-bottom: 30px; font-size: 26px;">{{this.$route.params.username}}</span>
 
-        <h6 class="follow-btn" style="margin: 30px 0; border-radius: 10px; border: 2px solid #c3ddecd0;
+        <!-- FOLLOW BUTTON -->
+        <h6 v-if="this.nowUser != this.$route.params.username" class="follow-btn"
+      style="margin-bottom: 30px; border-radius: 10px; border: 2px solid #c3ddecd0;
       width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
       >Following</h6>
 
@@ -59,6 +61,7 @@ export default {
   },
   data(){
     return{
+      nowUser: localStorage.getItem('username'),
       favorites:true,
       watchlist:false,
       posts:false,
@@ -68,7 +71,7 @@ export default {
   computed:{
     userInfo(){
       return this.$store.state.userInfo
-    }
+    },
   },
   methods:{
     isClicked(params){

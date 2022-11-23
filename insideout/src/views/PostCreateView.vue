@@ -1,6 +1,5 @@
 <template>
-  <div style="display:flex; align-items:center; flex-direction: column;
-  margin-top: 100px; width: 100%">
+  <div style="display:flex; align-items:center; flex-direction: column; margin-top: 100px; width: 100%">
     <h2>Create Post</h2>
 
     <div style="min-width: 300px; display:flex; justify-content: center; align-items: center; margin: 25px 0;">
