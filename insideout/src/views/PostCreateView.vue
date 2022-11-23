@@ -8,7 +8,7 @@
     </div>
 
     <section style="display:flex; flex-direction: column; align-items:center; width: fit-content;">
-      <input type="text" v-model="title" class="userInput post-title " placeholder="Title">
+      <input type="text" v-model="title" class="userInput post-title" placeholder="Title">
       <textarea cols="30" rows="10" v-model="content" class="post-content" placeholder="Content"></textarea>
 
       <div style="display:flex; justify-content: right; width: 100%;">

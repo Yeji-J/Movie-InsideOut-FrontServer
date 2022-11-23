@@ -13,15 +13,22 @@
     </div>
     
     <div style="padding: 10px;" class="card-container">
+
       <div class="cardbox"  v-for="movie in movies" :key="movie.id">
         <font-awesome-icon icon="fa-solid fa-thumbtack" class="pin" />
         <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" @click="goDetail(movie?.movie_id)">
-        <div class="card-content">
-          <span style="font-size: 18px; font-weight:bold;">{{movie.title}}</span>
-          {{movie.genres[0]["name"] }}
-          <font-awesome-icon icon="fa-solid fa-trash" @click="removeItem({type:'delete', movieId:movie?.movie_id})"/>
-          <font-awesome-icon icon="fa-solid fa-check" @click="removeItme({type:'get', movieId:movie?.movie_id})"/>
+
+        <div class="card-content" style="display:flex; flex-direction:column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 15px; font-weight:bold;">{{movie.title}}</span>
+            {{movie.genres[0]["name"] }}
+          </div>
+          <div style="display:flex; justify-content:right;">
+            <font-awesome-icon icon="fa-solid fa-check" @click="removeItme({type:'get', movieId:movie?.movie_id})" />
+            <font-awesome-icon icon="fa-solid fa-trash" @click="removeItem({type:'delete', movieId:movie?.movie_id})" style="margin-left: 10px;"/>
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -53,6 +60,7 @@ export default {
       this.$router.push({name:'DetailView', params:{id:movieId}})
     },
     removeItem(payload){
+      console.log(payload.movieId)
       const API_URL = "http://127.0.0.1:8000"
       const token = localStorage.getItem('user')
 
@@ -89,7 +97,7 @@ export default {
 .cardbox{
   margin: 10px;
   width: 230px;
-  height: 150px;
+  height: 170px;
   background-color:#f7e69c;
   transform: rotate(2deg);
   padding: 10px;
