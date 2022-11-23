@@ -13,20 +13,24 @@
     </div>
     
     <div style="padding: 10px;" class="card-container">
-      <div class="cardbox" @click="goDetail(movie?.movie_id)" v-for="movie in movies" :key="movie.id">
+      <div class="cardbox"  v-for="movie in movies" :key="movie.id">
         <font-awesome-icon icon="fa-solid fa-thumbtack" class="pin" />
-        <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`">
+        <img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" @click="goDetail(movie?.movie_id)">
         <div class="card-content">
           <span style="font-size: 18px; font-weight:bold;">{{movie.title}}</span>
           {{movie.genres[0]["name"] }}
+          <font-awesome-icon icon="fa-solid fa-trash" @click="removeItem({type:'delete', movieId:movie?.movie_id})"/>
+          <font-awesome-icon icon="fa-solid fa-check" @click="removeItme({type:'get', movieId:movie?.movie_id})"/>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
 // import MyWatchlistItem from '@/components/MyWatchlistItem.vue';
+import axios from 'axios';
 
 export default {
   name: 'MyWatchlist',
@@ -47,8 +51,26 @@ export default {
   methods:{
     goDetail(movieId){
       this.$router.push({name:'DetailView', params:{id:movieId}})
+    },
+    removeItem(payload){
+      const API_URL = "http://127.0.0.1:8000"
+      const token = localStorage.getItem('user')
+
+      axios({
+        method:payload.type,
+        url: `${API_URL}/accounts/watched/${payload.movieId}`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+      .then (()=>{
+        this.$store.dispatch('getUser', this.$route.params.username)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
-  }
+  },
 }
 </script>
 

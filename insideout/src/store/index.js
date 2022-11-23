@@ -2,9 +2,6 @@ import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
 
-// 일단 comment 완성하려고 토큰 저장
-// import createPersistedState from "vuex-persistedstate"
-
 const API_URL = "http://127.0.0.1:8000"
 const token = localStorage.getItem('user')
 
