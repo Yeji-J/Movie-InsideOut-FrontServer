@@ -8,9 +8,9 @@
 
     <hr>
     <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 50px; color:#c3ddecd0"/>
-        <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
-      </div>
+      <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 50px; color:#c3ddecd0"/>
+      <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
+    </div>
     
     <div style="padding: 10px;" class="card-container">
       <div class="cardbox" @click="goDetail(movie?.movie_id)" v-for="movie in movies" :key="movie.id">
@@ -54,23 +54,7 @@ export default {
 
 <style scoped>
 
-.search-bar {
-  padding-left: 10px;
-  width: 100%;
-  height: 35px;
-  background-color:#2c3036;
-  border-radius: 5px;
-}
 
-.search-bar:focus{
-  outline: none;
-  caret-color: #F8F9FA;
-  color: #F8F9FA;
-}
-
-.search-bar{
-  color:#F8F9FA;
-}
 
 .card-container{
   height: 80%;
@@ -84,7 +68,7 @@ export default {
   margin: 10px;
   width: 230px;
   height: 150px;
-  background-color:#c3ddecd0;
+  background-color:#f7e69c;
   transform: rotate(2deg);
   padding: 10px;
   position: relative;

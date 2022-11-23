@@ -5,7 +5,7 @@
         <font-awesome-icon icon="fa-solid fa-pen-to-square" 
         style="color:#b39ddb; margin: 0 10px;"/>Post
       </h2>
-      <div class="add-btn"><font-awesome-icon icon="fa-solid fa-plus" /> Add</div>
+      <div class="add-btn" @click="goCreate"><font-awesome-icon icon="fa-solid fa-plus" /> Add</div>
     </div>
     <hr>
   </div>
@@ -14,6 +14,11 @@
 <script>
 export default {
   name:'MyPost',
+  methods:{
+    goCreate(){
+      this.$router.push({name:'postcreate'})
+    }
+  }
 }
 </script>
 

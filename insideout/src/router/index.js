@@ -5,6 +5,7 @@ import DetailView from '../views/DetailView.vue'
 import BlogView from '@/views/BlogView.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import RecomView from '@/views/RecomView.vue'
+import PostCreateView from '@/views/PostCreateView.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,10 @@ const routes = [
     path: '/recommend',
     name:'recommend',
     component: RecomView
+  },{
+    path:'/post/create',
+    name:'postcreate',
+    component: PostCreateView
   }
 
 
