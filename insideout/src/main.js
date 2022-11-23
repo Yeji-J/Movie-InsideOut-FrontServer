@@ -5,8 +5,6 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import Carousel3d from 'vue-carousel-3d'
 
-import CKEditor from 'ckeditor4-vue';
-
 
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,7 +23,6 @@ library.add(
   fab
 )
 
-Vue.use( CKEditor );
 Vue.use(BootstrapVue)
 Vue.use(Carousel3d)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

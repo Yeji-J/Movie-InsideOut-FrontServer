@@ -3,14 +3,19 @@
   margin-top: 100px; width: 100%">
     <h2>Create Post</h2>
 
-    <section style="display:flex; flex-direction: column; align-items:center;">
-      <div style="min-width: 300px; display:flex; justify-content: center; 
-      width: 25%; align-items: center; margin: 25px 0;">
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 50px; color:#c3ddecd0"/>
-        <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
-      </div>
+    <div style="min-width: 300px; display:flex; justify-content: center; align-items: center; margin: 25px 0;">
+      <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
+      <input type="text" v-model="search" placeholder="Search Movie" class="search-bar">
+    </div>
 
-      <ckeditor v-model="content" :config="editorConfig"></ckeditor>
+    <section style="display:flex; flex-direction: column; align-items:center; width: fit-content;">
+      <input type="text" v-model="title" class="userInput post-title " placeholder="Title">
+      <textarea cols="30" rows="10" v-model="content" class="post-content" placeholder="Content"></textarea>
+
+      <div style="display:flex; justify-content: right; width: 100%;">
+        <div class="login-btn btns">SUBMIT</div>
+        <div class="login-btn btns" @click="$router.go(-1)">HOME</div>
+      </div>
     </section>
   </div>
 </template>
@@ -20,11 +25,9 @@ export default {
   name:'PostCreateView',
   data(){
     return {
+      search:null,
       title:null,
       content:null,
-      editorConfig: {
-          // The configuration of the editor.
-        },
     }
   }
 }
@@ -33,7 +36,7 @@ export default {
 <style>
 .search-bar {
   padding-left: 10px;
-  width: 100%;
+  min-width: 600px;
   height: 35px;
   background-color:#2c3036;
   border-radius: 5px;
@@ -51,7 +54,28 @@ export default {
 
 .post-title,
 .post-content {
-  min-width: 700px;
-  border: 1px solid #C3DDEC;
+  margin: 10px auto;
+  min-width:650px;
+  border: 2px solid #C3DDEC;
+  padding: 15px;
+  border-radius: 1px;
+}
+
+.post-content{
+  min-height: 350px;
+}
+
+.btns{
+  font-size: 15px;
+  width: 65px;
+  height: 30px;
+  background-color:#c3ddecd7;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  margin-left: 10px;
+  color:#2c3036;
+  font-weight: bold;
+  
 }
 </style>
