@@ -231,7 +231,7 @@ export default new Vuex.Store({
         }
       })
         .then((res)=>{
-          context.commit('SAVE_SEARCHMOVIE', res.data.results.slice(15))
+          context.commit('SAVE_SEARCHMOVIE', res.data.results.slice(0,5))
         })
         .catch((err)=>{
           console.log(err)

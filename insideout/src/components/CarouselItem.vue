@@ -15,7 +15,7 @@
       style="margin: 5px 0;"
     ></v-rating>
       <hr style="margin: 10px 0;">
-      <p>Genre | {{ movie?.genres[0]["name"] }}</p>
+      <p>Genre | <span v-if="movie?.genres[0]">{{ movie?.genres[0]["name"] }}</span></p>
       <p>Release Date | {{movie?.release_date}}</p>
       <p>Vote Count | {{movie?.vote_count}}</p>
       <button  @click="goDetail(movie?.movie_id)">MORE</button>

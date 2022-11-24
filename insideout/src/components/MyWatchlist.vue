@@ -31,8 +31,8 @@
 
         <div class="card-content" style="display:flex; flex-direction:column; justify-content: space-between;">
           <div>
-            <span style="font-size: 15px; font-weight:bold;">{{movie.title}}</span>
-            {{movie.genres[0]["name"] }}
+            <span style="font-size: 15px; font-weight:bold;">{{movie.title}}</span><br>
+            <span v-if="movie?.genres[0]">{{movie?.genres[0]['name'] }}</span>
           </div>
           <div style="display:flex; justify-content:right;">
             <font-awesome-icon icon="fa-solid fa-check" @click="removeItme({type:'get', movieId:movie?.movie_id})" />
@@ -67,7 +67,7 @@ export default {
   },
   computed:{
     movies(){
-      return this.$store.state.userInfo.favorites.slice(4)
+      return this.$store.state.userInfo.watch_list
     },
     searchMovies(){
       return this.$store.state.searchMovies
@@ -81,6 +81,7 @@ export default {
       this.$store.dispatch('searchMovie',this.searchInput)
     },
     addToWatchlist(movie){
+      console.log(this.$store.state.userInfo)
       axios({
         method:'post',
         url: `${API_URL}/movies/watchlist/`,
@@ -90,31 +91,31 @@ export default {
         }
       })
         .then(()=>{
-          console.log('success')
+          this.$store.dispatch('getUser', this.$route.params.username)
         })
         .catch((err)=>{
           console.log(err)
         })
-    }
-    // removeItem(payload){
-    //   console.log(payload.movieId)
-    //   
-    //   const token = localStorage.getItem('user')
+    },
+    removeItem(payload){
+      console.log(payload.movieId)
+      
+      const token = localStorage.getItem('user')
 
-    //   axios({
-    //     method:payload.type,
-    //     url: `${API_URL}/accounts/watched/${payload.movieId}`,
-    //     headers:{
-    //       Authorization: `JWT ${token}`
-    //     }
-    //   })
-    //   .then (()=>{
-    //     this.$store.dispatch('getUser', this.$route.params.username)
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-    // }
+      axios({
+        method:payload.type,
+        url: `${API_URL}/accounts/watched/${payload.movieId}`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+      .then (()=>{
+        this.$store.dispatch('getUser', this.$route.params.username)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
   },
 }
 </script>

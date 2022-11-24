@@ -20,7 +20,7 @@
     <!-- POST INPUT -->
     <section style="display:flex; flex-direction: column; align-items:center; width: fit-content;">
       <!-- MOVIE TITLE -->
-      <h4>{{this.selectedMovie}} hihi</h4>
+      <h4>{{this.selectedMovie}}</h4>
 
       <!-- TITLE -->
       <input type="text" v-model="title" class="userInput post-title" placeholder="Title">
