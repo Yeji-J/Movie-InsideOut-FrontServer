@@ -2,7 +2,7 @@
   <div style="max-width:800px; margin: 100px auto; ">
     <!-- WRITER -->
     <span style="margin-left: 1em;">Writer : {{this.post?.username}}</span>
-    <span style="margin-left: 36em;">{{this.post?.like_users.length}} Likes</span>
+    <span style="margin-left: 40em;">{{this.post?.like_users.length}} Likes</span>
 
     <div class="post-title" style="border-radius:10px; height: 60px; 
       display:flex; justify-content: space-between; text-align: center;">

@@ -8,6 +8,7 @@ import RecomView from '@/views/RecomView.vue'
 import PostCreateView from '@/views/PostCreateView.vue'
 import PostDetailView from '@/views/PostDetailView.vue'
 import PostUpdateView from '@/views/PostUpdateView.vue'
+import PageNotFound from '@/views/404View.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,12 @@ const routes = [
     path:'/post/update/:id',
     name:'postupdate',
     component: PostUpdateView
+  },
+  {
+    path:'*',
+    name:'pagenotfound',
+    component: PageNotFound
+
   }
 
 

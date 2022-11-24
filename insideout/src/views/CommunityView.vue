@@ -8,8 +8,8 @@
         <div v-for="(hot_follower, idx) in hot_followers" :key="idx" class="sidebox" 
         @click="$router.push({name:'blog', params: {username:hot_follower?.username}})">
           <div style="background-color:white; border-radius:20px">IMG</div>
-          <span>{{hot_follower.username}}</span>
-          <div class="numbox">{{hot_follower.follower.length}}</div>
+          <span>{{hot_follower?.username}}</span>
+          <div class="numbox">{{hot_follower?.follower.length}}</div>
         </div>
       </div>
 
@@ -17,9 +17,9 @@
         <h4>Recent Posts</h4>
         <hr>
         <div v-for="post in recent_posts" :key="post.id" class="sidebox"
-        @click="$router.push({name:'postdetail', params: {id:post.id}})">
-          <div style="height: 22px; width: 180px; overflow:hidden;">{{post.title}}</div>...
-          <div class="numbox">{{post.like_users.length}}</div>
+        @click="$router.push({name:'postdetail', params: {id:post?.id}})">
+          <div style="height: 22px; width: 180px; overflow:hidden;">{{post?.title}}</div>...
+          <div class="numbox">{{post?.like_users.length}}</div>
         </div>
       </div>
     </section>
@@ -41,10 +41,10 @@ export default {
   computed:{
     // 임시 데이터 (영화)
     hot_followers(){
-      return this.$store.state.community.hot_follower
+      return this.$store.state.community?.hot_follower
     },
     recent_posts(){
-      return this.$store.state.community.recent_post
+      return this.$store.state.community?.recent_post
     },
     // hot_posts(){
     //   return this.$store.state.community.hot_post
