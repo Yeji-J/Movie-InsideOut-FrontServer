@@ -31,13 +31,9 @@
 <script>
 export default {
   name: 'RecomViewList',
-  data(){
-    return {
-      movies:this.$store.state.movies
-    }
-  },
   props:{
     feeling:String,
+    movies:Array,
   },
   methods:{
     goDetail(movieId){

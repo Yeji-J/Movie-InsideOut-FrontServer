@@ -5,25 +5,27 @@
       <div>
         <h4>Hot reviewers</h4>
         <hr>
-        <div v-for="(hot_follower, idx) in hot_followers" :key="idx" class="sidebox">
+        <div v-for="(hot_follower, idx) in hot_followers" :key="idx" class="sidebox" 
+        @click="$router.push({name:'blog', params: {username:hot_follower?.username}})">
           <div style="background-color:white; border-radius:20px">IMG</div>
           <span>{{hot_follower.username}}</span>
-          <div class="numbox">{{hot_follower.follower}}</div>
+          <div class="numbox">{{hot_follower.follower.length}}</div>
         </div>
       </div>
 
       <div style="margin: 60px 0;">
         <h4>Recent Posts</h4>
         <hr>
-        <div v-for="review in recent_posts" :key="review.id" class="sidebox">
-          <div style="height: 22px; width: 180px; overflow:hidden;">{{review.title}}</div>...
-          <div class="numbox">{{review.like_users|length}}</div>
+        <div v-for="post in recent_posts" :key="post.id" class="sidebox"
+        @click="$router.push({name:'postdetail', params: {id:post.id}})">
+          <div style="height: 22px; width: 180px; overflow:hidden;">{{post.title}}</div>...
+          <div class="numbox">{{post.like_users.length}}</div>
         </div>
       </div>
     </section>
 
     <section id="article" style="width:fit-content; padding-top: 70px;">
-      <community-article/> // :hot_posts="hot_posts"/>
+      <community-article/> <!-- :hot_posts="hot_posts"/> -->
     </section>
   </div>
 </template>
@@ -69,6 +71,10 @@ section{
   margin-bottom: 20px; 
   display: flex; 
   justify-content:space-between; 
+}
+
+.sidebox:hover{
+  cursor: pointer;
 }
 
 .numbox{

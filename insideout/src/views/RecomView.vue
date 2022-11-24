@@ -9,19 +9,24 @@
       <div @click="recommend('Disgust')"><img src="@/assets/disgust.png" style="width:120px;"><h4>Disgust</h4></div>
     </nav>
 
-    <recom-view-list v-if="feeling" :feeling="feeling"/>
+    <recom-view-list v-if="feeling" :feeling="feeling" :movies="this.movies"/>
     
   </div>
 </template>
 
 <script>
 import RecomViewList from '@/components/RecomViewList.vue';
+import axios from 'axios'
+
+
+const API_URL = "http://127.0.0.1:8000"
 
 export default {
   name:'RecomView',
   data(){
     return{
       feeling:null,
+      movies:null,
     }
   },
   components:{
@@ -30,6 +35,21 @@ export default {
   methods:{
     recommend(feeling){
       this.feeling = feeling
+      
+      axios({
+        method:'get',
+        url: `${API_URL}/movies/recommend/`,
+        params: {
+          sorted:feeling
+        }
+      })
+      .then((res)=>{
+        this.movies = res.data
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
 
   }

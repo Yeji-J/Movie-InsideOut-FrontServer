@@ -24,6 +24,7 @@ export default new Vuex.Store({
     searchMovies:null,
     postLike:null,
     community:null,
+    recommends:null,
   },
   getters: {},
   mutations: {
@@ -298,7 +299,8 @@ export default new Vuex.Store({
       .catch((err)=>{
         console.log(err)
       })
-    }
+    },
+
     
   },
   modules: {},
