@@ -1,17 +1,17 @@
 <template>
   <div style="display:flex; align-items:center; flex-direction: column; margin-top: 100px; width: 100%">
     <h2>Create Post</h2>
+    <h6>Search and click a movie you want to write a post about</h6>
 
     <!-- SEARCH BAR -->
     <div style="min-width: 300px; display:flex; justify-content: center; align-items: center; margin: 25px 0;">
       <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
-      <input type="text" v-model="searchInput" placeholder="Search Movie" class="search-bar" @keyup.enter="searchMovie"/>
+      <input type="text" v-model="searchInput" placeholder="Enter movie title" class="search-bar" @keyup.enter="searchMovie"/>
     </div>
 
     <!-- SEARCH RESULT -->
     <div v-if="this.searchResult">
-      <h5>Click a movie you want</h5>
-      <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id" @click="addToWatchlist(searchMovie)">
+      <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id" @click="selectMovie(searchMovie)">
         <search-list :movie="searchMovie" />
       </div>
     </div>
@@ -20,7 +20,7 @@
     <!-- POST INPUT -->
     <section style="display:flex; flex-direction: column; align-items:center; width: fit-content;">
       <!-- MOVIE TITLE -->
-      <h4>{{this.selectedMovie}}</h4>
+      <h4 v-if="this.selectedMovie">{{this.selectedMovie.title}}</h4>
 
       <!-- TITLE -->
       <input type="text" v-model="title" class="userInput post-title" placeholder="Title">
@@ -30,7 +30,7 @@
 
       <!-- BUTTONS -->
       <div style="display:flex; justify-content: right; width: 100%;">
-        <div class="login-btn btns">SUBMIT</div>
+        <div class="login-btn btns" @click="savePost">SUBMIT</div>
         <div class="login-btn btns" @click="$router.go(-1)">HOME</div>
       </div>
     </section>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import SearchList from '@/components/SearchList.vue'
 
 export default {
@@ -63,9 +64,39 @@ export default {
   methods:{
     searchMovie(){
       this.$store.dispatch('searchMovie', this.searchInput)
-      this.searchResult = true
-      console.log(this.searchMovies)
     },
+    selectMovie(movie){
+      this.selectedMovie = movie
+    },
+    savePost(){
+      const API_URL = "http://127.0.0.1:8000"
+      const token = localStorage.getItem('user')
+
+      if (!this.title.trim()){
+        alert('Please enter a title')
+      } else if (!this.content.trim()){
+        alert('Please enter a content')
+      }
+
+      axios({
+        method:'post',
+        url:`${API_URL}/community/${this.selectedMovie.id}/create/`,
+        data:{
+          title:this.title,
+          content:this.content,
+        },
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then(()=>{
+          this.$router.go(-1)
+        })
+        .then((err)=>{
+          console.log(err)
+        })
+
+    }
   }
 }
 </script>

@@ -98,13 +98,13 @@ export default {
         })
     },
     removeItem(payload){
-      console.log(payload.movieId)
+      console.log(payload.type)
       
       const token = localStorage.getItem('user')
 
       axios({
         method:payload.type,
-        url: `${API_URL}/accounts/watched/${payload.movieId}`,
+        url: `${API_URL}/accounts/watched/${payload.movieId}/`,
         headers:{
           Authorization: `JWT ${token}`
         }
