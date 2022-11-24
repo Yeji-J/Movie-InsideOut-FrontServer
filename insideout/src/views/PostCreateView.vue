@@ -1,7 +1,7 @@
 <template>
   <div style="display:flex; align-items:center; flex-direction: column; margin-top: 100px; width: 100%">
     <h2>Create Post</h2>
-    <h6>Search and click a movie you want to write a post about</h6>
+    <h6>Search and click a movie you want to write about</h6>
 
     <!-- SEARCH BAR -->
     <div style="min-width: 300px; display:flex; justify-content: center; align-items: center; margin: 25px 0;">
@@ -10,7 +10,7 @@
     </div>
 
     <!-- SEARCH RESULT -->
-    <div v-if="this.searchResult">
+    <div v-if="this.showResult" style="display:flex;">
       <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id" @click="selectMovie(searchMovie)">
         <search-list :movie="searchMovie" />
       </div>
@@ -52,7 +52,7 @@ export default {
       title:null,
       content:null,
       // 일단 true로 => 영화 클릭하면 닫히게 만드는 기준 값
-      searchResult: true,
+      showResult: false,
       selectedMovie: null,
     }
   },
@@ -63,9 +63,11 @@ export default {
   },
   methods:{
     searchMovie(){
+      this.showResult = true
       this.$store.dispatch('searchMovie', this.searchInput)
     },
     selectMovie(movie){
+      this.showResult = false
       this.selectedMovie = movie
     },
     savePost(){
@@ -82,6 +84,7 @@ export default {
         method:'post',
         url:`${API_URL}/community/${this.selectedMovie.id}/create/`,
         data:{
+          movie:this.selectedMovie,
           title:this.title,
           content:this.content,
         },
@@ -123,7 +126,7 @@ export default {
 .post-title,
 .post-content {
   margin: 10px auto;
-  min-width:650px;
+  min-width:750px;
   border: 2px solid #C3DDEC;
   padding: 15px;
   border-radius: 1px;
@@ -139,7 +142,7 @@ export default {
   height: 30px;
   background-color:#c3ddecd7;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   margin: 0;
   margin-left: 10px;
   color:#2c3036;

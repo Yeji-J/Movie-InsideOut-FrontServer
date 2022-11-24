@@ -9,21 +9,23 @@
     <hr>
 
     <!-- SEARCH BAR -->
-    <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
-      <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
-      <input type="text" v-model="searchInput" placeholder="Search Movie" class="search-bar" style="min-width: 90%;" @keyup.enter="searchMovie">
-    </div>
+    <span v-if="this.username === $route.params.username">
+      <h6 style="text-align:center;">Search and click a movie to add to watchlist</h6>
+      <div style="min-width: 300px; display:flex; justify-content: center; width: 100%; align-items: center;">
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" style="width: 30px; color:#c3ddecd0"/>
+        <input type="text" v-model="searchInput" placeholder="Search Movie" class="search-bar" style="min-width: 90%;" @keyup.enter="searchMovie">
+      </div>
+    </span>
 
     <!-- SEARCH RESULT -->
-    <div v-if="this.searchResult">
-      <h5>Click a movie you want</h5>
-      <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id" @click="addToWatchlist(searchMovie)">
-        <search-list :movie="searchMovie" />
+    <div v-if="this.showResult" style="display: flex; flex-wrap:wrap; justify-content: center;">
+      <div v-for="searchMovie in this.searchMovies" :key="searchMovie.id">
+        <search-list :movie="searchMovie" @close-result="showResult=false"/>
       </div>
     </div>
 
     <!-- WATCHLIST -->
-    <div style="padding: 10px;" class="card-container">
+    <div v-if="!this.showResult" style="padding: 10px;" class="card-container" >
 
       <div class="cardbox"  v-for="movie in movies" :key="movie.id">
         <font-awesome-icon icon="fa-solid fa-thumbtack" class="pin" />
@@ -34,9 +36,9 @@
             <span style="font-size: 15px; font-weight:bold;">{{movie.title}}</span><br>
             <span v-if="movie?.genres[0]">{{movie?.genres[0]['name'] }}</span>
           </div>
-          <div style="display:flex; justify-content:right;">
-            <font-awesome-icon icon="fa-solid fa-check" @click="removeItme({type:'get', movieId:movie?.movie_id})" />
-            <font-awesome-icon icon="fa-solid fa-trash" @click="removeItem({type:'delete', movieId:movie?.movie_id})" style="margin-left: 10px;"/>
+
+          <div v-if="username === $route.params.username" style="display:flex; justify-content:right;">
+            <font-awesome-icon icon="fa-solid fa-trash" @click="removeItem(movie?.movie_id)" style="margin-left: 10px;"/>
           </div>
         </div>
 
@@ -51,7 +53,6 @@ import axios from 'axios'
 import SearchList from '@/components/SearchList.vue'
 
 const API_URL = "http://127.0.0.1:8000"
-const token = localStorage.getItem('user')
 
 export default {
   name: 'MyWatchlist',
@@ -61,8 +62,8 @@ export default {
   data(){
     return {
       searchInput: null,
-      // 일단 true로 => 영화 클릭하면 닫히게 만드는 기준 값
-      searchResult: true,
+      showResult: false,
+      username: localStorage.getItem('username'),
     }
   },
   computed:{
@@ -78,33 +79,16 @@ export default {
       this.$router.push({name:'DetailView', params:{id:movieId}})
     },
     searchMovie(){
+      this.showResult = true
       this.$store.dispatch('searchMovie',this.searchInput)
     },
-    addToWatchlist(movie){
-      console.log(this.$store.state.userInfo)
-      axios({
-        method:'post',
-        url: `${API_URL}/movies/watchlist/`,
-        data:{movie},
-        headers:{
-          Authorization: `JWT ${token}`
-        }
-      })
-        .then(()=>{
-          this.$store.dispatch('getUser', this.$route.params.username)
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
-    },
-    removeItem(payload){
-      console.log(payload.type)
-      
+    
+    removeItem(movieId){     
       const token = localStorage.getItem('user')
 
       axios({
-        method:payload.type,
-        url: `${API_URL}/accounts/watched/${payload.movieId}/`,
+        method:'delete',
+        url: `${API_URL}/profile/watched/${movieId}/`,
         headers:{
           Authorization: `JWT ${token}`
         }

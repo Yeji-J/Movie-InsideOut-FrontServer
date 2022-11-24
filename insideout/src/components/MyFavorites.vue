@@ -8,8 +8,8 @@
 
     <div class=card-container>
 
-      <div class="cardbox" @click="goDetail(favorite?.movie_id)"
-      v-for="favorite in favorites" :key="favorite.id">
+      <div class="cardbox" v-for="favorite in favorites" :key="favorite.id"
+      @click="goDetail(favorite?.movie_id)">
 
         <img :src="`https://image.tmdb.org/t/p/original${favorite?.poster_path}`">
 
@@ -70,6 +70,7 @@ export default {
 }
 
 .cardbox{
+  max-height: 270px;
   width:content-fit;
   max-width: 150px;
   display:flex;

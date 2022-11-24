@@ -33,7 +33,7 @@
 export default {
   name: "MyHistory",
   props:{
-    reviews:Array
+    reviews:Array,
   },
   methods:{
     goDetail(movieId){
@@ -82,7 +82,8 @@ export default {
   border-radius: 5px;
   box-shadow: inset 0 0 1px #4b4f55;
   margin-bottom: 10px;
-
+  max-height: 200px;
+  overflow: hidden;
   transition: transform 0.2s linear;
 }
 

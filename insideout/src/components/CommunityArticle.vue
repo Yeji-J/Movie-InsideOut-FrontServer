@@ -3,7 +3,7 @@
     <!-- 첫 번째 기사 -->
     <div style="width: 800px; height: 270px; display:flex; padding:20px; justify-content: space-between; ">
 
-      <img :src="`https://image.tmdb.org/t/p/original${articles[0].backdrop_path}`"
+      <img :src="`https://image.tmdb.org/t/p/original${articles[0].movie.backdrop_path}`"
         style="border-radius: 20px; width: 350px; margin-right: 40px;">
 
       <div style="display:flex; flex-direction: column; width: 400px; overflow: hidden;">
@@ -20,7 +20,7 @@
       <div v-for="article in articles.slice(1)" :key="article.id" 
       style="width: 230px; margin: 20px; display:flex; flex-direction: column; justify-content: space-between">
       
-        <img :src="`https://image.tmdb.org/t/p/original${article.backdrop_path}`"
+        <img :src="`https://image.tmdb.org/t/p/original${article.movie.backdrop_path}`"
         style="border-radius: 20px;">
 
         <span style="margin: 2px 0; font-size: 14px;">Username</span>
@@ -38,7 +38,7 @@ export default {
   computed:{
     // 임시 데이터 (영화)
     articles(){
-      return this.$store.state.movies.slice(6)
+      return this.$store.state.community.hot_post
     },
   }
 }

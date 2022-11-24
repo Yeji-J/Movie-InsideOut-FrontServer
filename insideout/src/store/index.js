@@ -22,6 +22,8 @@ export default new Vuex.Store({
     movieLike:null,
     reviews:null,
     searchMovies:null,
+    postLike:null,
+    community:null,
   },
   getters: {},
   mutations: {
@@ -64,6 +66,9 @@ export default new Vuex.Store({
     },
     SAVE_SEARCHMOVIE(state, payload){
       state.searchMovies = payload
+    },
+    SAVE_COMMUNITY(state, payload){
+      state.community = payload
     }
 
   },
@@ -149,19 +154,49 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    getPost(context, postId){
+      axios({
+        method:'get',
+        url: `${API_URL}/community/${postId}/`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then((res)=>{
+          context.state.post = res.data.data
+          context.state.postLike = res.data.is_liked
+          
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    },
     // LIKES
-    getLike(context, movieId){
+    getLike(context, payload){
+      let URL
+
+      if (payload.type === 'movie'){
+        URL = `${API_URL}/movies/${payload.id}/like/`
+      } else {
+        URL = `${API_URL}/community/${payload.id}/like/`
+      }
 
       axios({
         method:'get',
-        url: `${API_URL}/movies/${movieId}/like/`,
+        url: URL,
         // header에 token 넣어주기
         headers:{
           Authorization: `JWT ${token}`
         }
       })
         .then((res)=>{
-          context.state.movieLike = res.data.is_liked
+          if (payload.type==='movie'){
+            context.state.movieLike = res.data.is_liked
+          } else {
+            context.state.postLike = res.data.is_liked
+            this.dispatch('getPost', payload.id)
+          }
+          
         })
         .catch((err)=>{
           console.log(err)
@@ -236,7 +271,35 @@ export default new Vuex.Store({
         .catch((err)=>{
           console.log(err)
         });
+    },
+    deletePost(context, postId){
+      axios({
+        url: `${API_URL}/community/${postId}/`,
+        method: 'delete',
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+      .then (()=>{
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+    getCommunity(context){
+      axios({
+        url: `${API_URL}/community/`,
+        method: 'get'
+      })
+      .then((res)=>{
+        console.log(res)
+        context.commit('SAVE_COMMUNITY', res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
+    
   },
   modules: {},
 })

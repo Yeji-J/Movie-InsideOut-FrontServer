@@ -7,10 +7,20 @@
         <span style="margin-bottom: 30px; font-size: 26px;">{{this.$route.params.username}}</span>
 
         <!-- FOLLOW BUTTON -->
-        <h6 v-if="this.nowUser != this.$route.params.username" class="follow-btn"
-      style="margin-bottom: 30px; border-radius: 10px; border: 2px solid #c3ddecd0;
-      width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
-      >Following</h6>
+        <div v-if="this.nowUser != this.$route.params.username">
+          <h6 v-if="isFollowed==false" @click="getFollow" class="follow-btn"
+          style="margin-bottom: 30px; border-radius: 10px; border: 2px solid #c3ddecd0;
+          width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
+          >Following</h6>
+
+
+          <h6 v-if="isFollowed==true" @click="getFollow" class="follow-btn"
+          style="margin-bottom: 30px; border-radius: 10px; border: 2px solid #c3ddecd0;
+          width: 90px; height: 30px; display: flex; justify-content: center; align-items: center;"
+          >UnFollowing</h6>
+        </div>
+        
+
 
         <div style="background-color:#c3ddecd0; color:#23262b; padding: 10px 0; width: 100%;">
           <div><font-awesome-icon icon="fa-solid fa-comment-dots" class="icon" />Reviews | {{this.userInfo?.reviews.length}}</div>
@@ -40,7 +50,7 @@
       <my-favorites :favorites="this.userInfo?.favorites" v-if="this.favorites"/>
       <my-watchlist v-if="this.watchlist"/>
       <my-post v-if="this.posts"/>
-      <my-history v-if="this.history" :reviews="this.userInfo.reviews"/>
+      <my-history v-if="this.history" :reviews="this.userInfo?.reviews"/>
     </div>
   </div>
 </template>
@@ -50,6 +60,7 @@ import MyPost from '@/components/MyPost.vue'
 import MyWatchlist from '../components/MyWatchlist.vue'
 import MyFavorites from '../components/MyFavorites.vue'
 import MyHistory from '../components/MyHistory.vue'
+import axios from 'axios'
 
 export default {
   name:'BlogView',
@@ -72,6 +83,9 @@ export default {
     userInfo(){
       return this.$store.state.userInfo
     },
+    isFollowed(){
+      return this.userInfo?.is_followed
+    }
   },
   methods:{
     isClicked(params){
@@ -96,11 +110,40 @@ export default {
         this.favorites=false
         this.history=true
       }
-    }
+    },
+    checkFollow(is_followed){
+      const btnText = document.querySelector('.follow-btn')
+
+      if (is_followed) {
+        btnText.innerText = 'UnFollowing'
+      } else {
+        btnText.innerText = 'Following'
+      }
+    },
+    // GET follow
+    getFollow(){
+      const API_URL = "http://127.0.0.1:8000"
+      const token = localStorage.getItem('user')
+
+      axios({
+        method:'get',
+        url: `${API_URL}/profile/follow/${this.$route.params.username}/`,
+        headers:{
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then(()=>{
+          // this_followed = res.data.is_followed
+          this.$store.dispatch('getUser', this.$route.params.username)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    },
   },
-  beforeCreate(){
+  created(){
     this.$store.dispatch('getUser', this.$route.params.username)
-  }
+  },
 }
 </script>
 

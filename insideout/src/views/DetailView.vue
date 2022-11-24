@@ -64,7 +64,7 @@
 <!-- REVIEWS -->
     <section style="margin: 70px 350px; min-width: 700px; max-width: 1200px; ">
       <span style="font-size: 30px;">Reviews</span>
-      <span style="margin: 0 20px 0 10px;">( {{reviews.length}} )</span>
+      <span style="margin: 0 20px 0 10px;">( {{reviews?.length}} )</span>
       <span v-if="reviewBtn" class="form-btn" @click="formClicked" >Write Review</span>
       <hr>
 
@@ -141,7 +141,11 @@ export default {
       }
     },
     getLike(){
-      this.$store.dispatch('getLike', this.$route.params.id)
+      const payload = {
+        type:'movie',
+        id:this.$route.params.id
+      }
+      this.$store.dispatch('getLike', payload)
     }
   },
   created(){
@@ -186,18 +190,7 @@ export default {
   top: 620px;
 }
 
-.heart-btn{
-  position: absolute;
-  color: #ec407a;
-  top: 920px;
-  left: 485px;
-  transition: transform 0.2s linear;
-}
 
-.heart-btn:hover{
-  cursor: pointer;
-  transform: scale(1.2);
-}
 
 .movie-detail-content div {
   margin: 30px 0;

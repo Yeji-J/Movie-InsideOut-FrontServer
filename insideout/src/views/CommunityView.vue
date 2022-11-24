@@ -3,27 +3,27 @@
     <section id="board" style=" padding: 40px;">
 
       <div>
-        <h4>Hot Reviewers</h4>
+        <h4>Hot reviewers</h4>
         <hr>
-        <div v-for="reviewer in reviewers" :key="reviewer.id" class="sidebox">
+        <div v-for="(hot_follower, idx) in hot_followers" :key="idx" class="sidebox">
           <div style="background-color:white; border-radius:20px">IMG</div>
-          <span>{{reviewer?.genres[0]["name"]}}</span>
-          <div class="numbox">{{reviewer?.vote_count}}</div>
+          <span>{{hot_follower.username}}</span>
+          <div class="numbox">{{hot_follower.follower}}</div>
         </div>
       </div>
 
       <div style="margin: 60px 0;">
         <h4>Recent Posts</h4>
         <hr>
-        <div v-for="reviewer in reviewers" :key="reviewer.id" class="sidebox">
-          <div style="height: 22px; width: 180px; overflow:hidden;">{{reviewer?.overview}}</div>...
-          <div class="numbox">{{reviewer?.vote_count}}</div>
+        <div v-for="review in recent_posts" :key="review.id" class="sidebox">
+          <div style="height: 22px; width: 180px; overflow:hidden;">{{review.title}}</div>...
+          <div class="numbox">{{review.like_users|length}}</div>
         </div>
       </div>
     </section>
 
     <section id="article" style="width:fit-content; padding-top: 70px;">
-      <community-article/>
+      <community-article/> // :hot_posts="hot_posts"/>
     </section>
   </div>
 </template>
@@ -38,13 +38,19 @@ export default {
   },
   computed:{
     // 임시 데이터 (영화)
-    reviewers(){
-      return this.$store.state.movies.slice(5)
+    hot_followers(){
+      return this.$store.state.community.hot_follower
     },
-    // reviews(){
-      
+    recent_posts(){
+      return this.$store.state.community.recent_post
+    },
+    // hot_posts(){
+    //   return this.$store.state.community.hot_post
     // }
-  }
+  },
+  created(){
+    this.$store.dispatch('getCommunity')
+  },
 }
 </script>
 
