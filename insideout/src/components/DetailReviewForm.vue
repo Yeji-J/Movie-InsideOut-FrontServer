@@ -1,101 +1,130 @@
 <template>
   <form id="reviewForm" @submit.prevent="createReview">
-    <span style="font-size: 25px; margin-right: 20px;">{{movie?.title}}</span>
+    <span style="font-size: 25px; margin-right: 20px">{{ movie?.title }}</span>
 
     <!-- RATINGS -->
     <span class="star">
       ★★★★★
       <span>★★★★★</span>
-      <input type="range" @input="drawStar" v-model="vote" step="1" min="0" max="10">
+      <input
+        type="range"
+        @input="drawStar"
+        v-model="vote"
+        step="1"
+        min="0"
+        max="10"
+      />
     </span>
     <div>
-      <textarea cols="30" rows="10" placeholder="Write your review !" v-model.trim="content"></textarea>
-      <input type="submit" value="write" class="review-btn"
-      style="padding: 2px 7px; margin: 10px;">
+      <textarea
+        cols="30"
+        rows="10"
+        placeholder="Write your review !"
+        v-model.trim="content"
+      ></textarea>
+      <input
+        type="submit"
+        value="write"
+        class="review-btn"
+        style="padding: 2px 7px; margin: 10px"
+      />
     </div>
   </form>
 </template>
 
 <script>
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
+const token = localStorage.getItem('user')
+
 export default {
-  name:'DetailReviewForm',
-  data(){
-    return{
-      vote:0,
+  name: 'DetailReviewForm',
+  data() {
+    return {
+      vote: 0,
       content: null,
     }
   },
-  props:{
-    movie:Object,
+  props: {
+    movie: Object,
   },
-  methods:{
+  methods: {
     drawStar(event) {
-      document.querySelector('.star span').style.width = `${event.target.value * 15}px`;
+      document.querySelector('.star span').style.width = `${
+        event.target.value * 15
+      }px`
     },
-    createReview(){
-      if (!this.content){
+    createReview() {
+      if (!this.content) {
         alert('Please write the content')
-      } else {
-        const payload={
-        movieId:  this.$route.params.id,
-        data:{
-          content:this.content,
-          vote:this.vote,
-        }
+        return false
       }
-      this.$store.dispatch('createReview', payload)
-      this.$emit('close-form')
-      this.$emit('close-btn')
-      }
-      
-    }
-  }
+
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/${this.$route.params.id}/review_create/`,
+        data: {
+          content: this.content,
+          vote: this.vote,
+        },
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      })
+        .then(() => {
+          this.$emit('close-form')
+          this.$emit('close-btn')
+          this.$emit('getReviews')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+  },
 }
-
-
 </script>
 
 <style>
-#reviewForm{
+#reviewForm {
   margin: 0 auto;
   width: 100%;
   border-radius: 10px;
-  border: 0.5px solid #F8F9FA;
+  border: 0.5px solid #f8f9fa;
   padding: 20px 40px;
 }
 
-textarea{
-  color:#F8F9FA;
+textarea {
+  color: #f8f9fa;
   width: 80%;
   min-width: 300px;
-  max-height:60px; 
-  font-size:17px; 
+  max-height: 60px;
+  font-size: 17px;
   padding: 10px;
   margin: 20px;
   margin-right: 30px;
-  border:0;
+  border: 0;
   resize: none;
 }
 
-textarea:hover{
-  border-bottom: solid 1px #F8F9FA;
+textarea:hover {
+  border-bottom: solid 1px #f8f9fa;
 }
 
-textarea:focus{
+textarea:focus {
   outline: none;
-  caret-color: #F8F9FA;
+  caret-color: #f8f9fa;
 }
 
 textarea::-webkit-scrollbar {
   width: 10px;
 }
 
-textarea::-webkit-scrollbar-corner{
-  display:none;
+textarea::-webkit-scrollbar-corner {
+  display: none;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color:#C3DDEC;
+  background-color: #c3ddec;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
@@ -103,11 +132,11 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .star {
-    position: relative;
-    font-size: 30px;
-    color: #ddd;
-  }
-  
+  position: relative;
+  font-size: 30px;
+  color: #ddd;
+}
+
 .star input {
   width: 160px;
   height: 100%;
@@ -121,37 +150,34 @@ textarea::-webkit-scrollbar-thumb {
 
 .star span {
   width: 0;
-  position: absolute; 
+  position: absolute;
   left: 7px;
   color: rgb(255, 188, 4);
   overflow: hidden;
   pointer-events: none;
 }
 
-
 .review-btn,
-.form-btn{
-  border: 1px solid #F8F9FA; 
+.form-btn {
+  border: 1px solid #f8f9fa;
   transition: transform 0.3;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .review-btn:hover,
-.form-btn:hover{
+.form-btn:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
-
 .review-btn:active,
-.form-btn:active{
+.form-btn:active {
   transform: translateY(4px);
 }
 
-.form-btn{
-  padding: 7px; 
-  font-size: 13px; 
-  display:inline-block;
+.form-btn {
+  padding: 7px;
+  font-size: 13px;
+  display: inline-block;
 }
-
 </style>
